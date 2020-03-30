@@ -1,0 +1,136 @@
+#newPatientCheckin {
+    margin: 0 auto;
+   
+}
+
+fieldset {
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: 360px;
+    width: 700px;
+}
+
+legend {
+    font-size: 17px;
+    color: #602352;
+    width: auto;
+    padding: 0 1px;
+}
+
+.form-control {
+    max-width: 350px;
+    position: fixed;
+    left: 350px;
+    margin-top: 2px;
+    margin-left: -220px;
+    font-size: 14px;
+    height: 30px;
+}
+
+.form-group {
+    margin-top: -12px;
+}
+
+
+#gen {
+    position: fixed;
+    left: 105px;
+    margin-top: -5px;
+}
+
+#phone-div {
+    margin-top: 55px;
+}
+
+:placeholder-shown {
+    font-size: 14px;  
+}
+
+#dob {
+    font-size: 14px;
+    color: #6C757D;
+    width: 180px;
+}
+
+label {
+    font-size: 14px;
+    color: #602352;
+}
+
+#p-add-line1::after {
+    content: "Street address, P.O. box, company name, c/o";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+
+#p-add-line2::after {
+    content: "Apartment, suite , unit, building, floor, etc.";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+
+#p-city::after {
+    content: "City, Town";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+#p-state::after {
+    content: "State";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+#p-postalcode::after {
+    content: "Mobile, Landline etc.";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+#p-country::after {
+    content: "Country";
+    color: grey;
+    font-size: 10px;
+    padding: 5px;
+}
+
+#searchButton {
+
+    color: #602352;
+    background-color: white;
+    border-color: #602352;
+    
+}
+
+#cancelButton {
+    position: relative;
+    left: 10px;
+    color: #602352;
+    background-color: white;
+    border-color: #602352;  
+    
+}
+
+#cancelButton:hover {
+    color: white;
+    background-color: #602352;
+}
+
+#searchButton:hover {
+    color: white;
+    background-color: #602352;
+}
+
+#patientCheckinButtons {
+    font-size: 14px;
+    width: 60%;
+    position: absolute;
+    left: 124px;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+}

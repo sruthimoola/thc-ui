@@ -1,0 +1,29 @@
+<!-- <ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item"><button type="button" class="btn btn-outline-secondary" id="searchPatient">Search Patient</button></li>
+    <li class="list-group-item"><button type="button" class="btn btn-outline-secondary" id="patientCheckin">Patient Checkin</button></li>
+    
+  </ul> -->
+<div id="mainMenu">
+  <ul class= "nav topnav border rounded fixed-top">
+        <li><a routerLink = "/home" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-home"></i> Home</a></li>
+        <li><a routerLink = "/search-patient" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-search"></i> Search Patient</a></li>
+        <li><a routerLink = "/patient-checkin" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-check-square-o"></i> Patient Check-in</a></li>
+        <li><a routerLink = "/contact" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-envelope"></i> Contact Us</a></li>
+
+  </ul>
+</div>
+  <br>
+
+  <div id="router-outlet">
+  
+      <router-outlet></router-outlet>
+
+      <!-- <app-home-comp></app-home-comp>
+  
+      <app-search-comp></app-search-comp>
+
+      <app-patient-checkin-comp></app-patient-checkin-comp>
+
+      <app-contact-comp></app-contact-comp> -->
+  
+  </div>      

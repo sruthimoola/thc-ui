@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/themes/omega/theme.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/primeng.min.css" />
+
+<form [formGroup] = "patientSearchForm">
+
+   <fieldset class="form-group" id="searchCriteria">
+    <legend>Search Criteria</legend>
+    <div class="form-row">
+        <div class="col">
+            <label for="firstName">First Name</label>
+            <input type="text" 
+            class="form-control" 
+            id="firstName" 
+            name="firstName"
+            placeholder="First Name"
+            formControlName = "firstName"
+            >   
+        </div>
+        <div class="col">
+            <label for="lastName">Last Name</label>
+            <input type="text" 
+            class="form-control" 
+            id="lastName" 
+            placeholder="Last Name"
+            name = "lastName"
+            formControlName = "lastName">    
+        </div>
+        <!-- <div class="col">
+            <label for="patientId">Patient Id</label>
+            <input type="text" 
+            class="form-control" 
+            id="patientId" 
+            placeholder="Patient #"
+            name = "patientId"
+            formControlName = "patientId">    
+        </div> -->
+        <div class="col">
+            <label for="dob">Date of Birth</label>
+            <input type="date" 
+            class="form-control" 
+            id="dob"
+            name = "dob"
+            formControlName = "dob">    
+        </div>
+        <div class="col">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender" formControlName = "gender" name = "gender">
+                <option value=''>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>   
+        </div>
+        <div class="col">
+            <label for="phone">Phone #</label>
+            <input type="number" 
+            class="form-control" 
+            id="phone" 
+            placeholder="Phone #"
+            name = "phone"
+            formControlName = "phone"
+            pattern = "^[1-9][0-9]*$">   
+        </div>
+        <!-- <div class="col">
+            <label for="postalCode">PostalCode</label>
+            <input type="number" 
+            class="form-control" 
+            id="postalCode" 
+            placeholder="Postal Code"
+            name = "postalCode"
+            pattern = "^[1-9][0-9]*$"
+            formControlName = "postalCode">   
+        </div> -->
+    </div>
+    <div id="formButtons">
+            <button type="submit" 
+            id="searchButton" 
+            class="btn btn-outline-primary btn-sm" (click) = "onSearch()">Search <i class="fa fa-fw fa-search"></i></button>
+        
+            <button type="button" 
+            id="clearButton" 
+            class="btn btn-outline-secondary btn-sm" (click) = "onClear()">Clear</button>
+              
+    </div>
+    
+   </fieldset>
+</form>
+<br>
+
+<fieldset id="searchResults">
+    <legend>Search Results</legend>
+    <p-table #dt [columns]="cols" 
+                [value] = "patients" 
+                [rows]="10" 
+                [paginator]="patients.length > 0"
+                [scrollable]="true" scrollHeight="auto" [virtualRowHeight]="30"
+                styleClass = "border-rounded"
+                >
+        <!-- <ng-template pTemplate="caption">
+            List of Patients
+        </ng-template> -->
+        <ng-template pTemplate = "header" let-columns>
+            <tr>
+                <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+               </tr> 
+        </ng-template>
+        <ng-template pTemplate = "body" let-rowData>
+            <tr [ngClass]="'tableStyle'">
+                <td>{{ rowData.firstName }}</td>
+                <td>{{ rowData.lastName }}</td>
+                <td>{{ rowData.dob }}</td>
+                <td>{{ rowData.gender }}</td>
+                <td>{{ rowData.phone }}</td>
+                <!-- <td>{{ patient.address }}</td> -->
+                
+              </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            
+            <tr *ngIf = "searchMode" [ngClass]="'tableStyle'">
+                <td [attr.colspan]="columns.length" style="text-align:center">
+                    No records found
+                </td>
+                
+            </tr>
+        </ng-template>
+                 
+    </p-table>
+         
+</fieldset>

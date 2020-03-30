@@ -1,0 +1,106 @@
+fieldset {
+    padding: 5px;  
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+legend {
+    font-size: 17px;
+    color: #602352;
+    width: auto;
+    padding: 0 1px;
+}
+
+#searchCriteria {
+    height: 140px;
+}
+
+#searchResults {
+    position: absolute;
+    margin-top: -40px;
+    overflow-y: scroll;
+    width: 99.3%;
+}
+
+.form-row {
+    margin-top: -15px;
+}
+
+label {
+    font-size: 14px;
+    color: #602352;
+}
+
+:placeholder-shown {
+    font-size: 14px;  
+}
+
+
+.form-control {
+    font-size: 14px;
+    height: 30px;
+    
+}
+
+#dob {
+    font-size: 14px;
+    color: #6C757D;
+    
+}
+
+#gender {
+    font-size: 14px;
+    color: #6C757D;
+}
+
+#location {
+    font-size: 14px;
+    color: #6C757D;
+}
+
+#searchButton {
+
+    color: #602352;
+    background-color: white;
+    border-color: #602352;
+}
+
+#clearButton {
+    position: relative;
+    left: 10px;
+    color: #602352;
+    background-color: white;
+    border-color: #602352;  
+}
+
+#formButtons {
+    font-size: 14px;
+    position: relative;
+    top: 12px;
+    left: -20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#searchButton:hover {
+    color: white;
+    background-color: #602352;
+}
+
+#clearButton:hover {
+    color: white;
+    background-color: #602352;
+}
+
+p-table {
+    position: relative;
+    bottom: 10px;
+}
+
+.tableStyle {
+    color: #602352 !important;
+    font-family: 'Libre Baskerville', serif !important;
+}
