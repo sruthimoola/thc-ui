@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 
 import { PatientService } from 'src/app/patient.service';
 import { Patient } from 'src/app/patients.model';
@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Table } from 'primeng/table/table';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -31,27 +32,30 @@ patientCount = 0;
 
 public searchMode: boolean;
 
-flag = false;
+public exp = true;
+
 
 constructor(private patientService: PatientService,
             private route: ActivatedRoute,
-            private dataStorageService: DataStorageService) {
+            private dataStorageService: DataStorageService,
+            private spinner: NgxSpinnerService) {
 
 }
 ngOnInit() {
   this.searchMode = false;
   this.initForm();
   this.cols = [
-    { field: 'firstName', header: 'FirstName' },
-    { field: 'lastName', header: 'LastName' },
-    { field: 'dob', header: 'DateOfBirth' },
-    { field: 'gender', header: 'Gender'},
-    { field: 'phone', header: 'Phone #'}
+    { field: 'firstName', header: 'FirstName', display: 'table-cell' },
+    { field: 'lastName', header: 'LastName', display: 'table-cell' },
+    { field: 'dob', header: 'DateOfBirth', display: 'table-cell' },
+    { field: 'gender', header: 'Gender', display: 'table-cell' },
+    { field: 'phone', header: 'Phone #', display: 'table-cell' }
   ];
 }
 
 
 private initForm() {
+  const pId = '';
   const firstName = '';
   const lastName = '';
   const dob = '';
@@ -60,19 +64,19 @@ private initForm() {
   // const postalCode = [];
 
   this.patientSearchForm = new FormGroup({
+    pId: new FormControl(pId),
     firstName: new FormControl(firstName),
     lastName: new FormControl(lastName),
     dob: new FormControl(dob),
     gender: new FormControl(gender),
-    phone: new FormControl(phone)
+    phone: new FormControl(phone, Validators.maxLength(10))
     // postalCode: new FormControl(postalCode)
   });
 
 }
 
 onSearch() {
-  this.searchMode = true;
-  // this.patientCount = 0;
+  this.spinner.show();
 
   let c = 0;
   for (const field in this.patientSearchForm.controls) {
@@ -83,20 +87,24 @@ onSearch() {
   }
 
   if (c === 0) {
+    this.searchMode = true;
+    this.spinner.hide();
     return;
   }
 
+  const pId = this.patientSearchForm.controls.pId.value ? this.patientSearchForm.controls.pId.value : '*';
   const firstName = this.patientSearchForm.controls.firstName.value ? this.patientSearchForm.controls.firstName.value : '*';
   const lastName = this.patientSearchForm.controls.lastName.value ? this.patientSearchForm.controls.lastName.value : '*';
   const dob = this.patientSearchForm.controls.dob.value ? this.patientSearchForm.controls.dob.value : '*';
   const gender = this.patientSearchForm.controls.gender.value ? this.patientSearchForm.controls.gender.value : '*';
   const phone = this.patientSearchForm.controls.phone.value ? this.patientSearchForm.controls.phone.value : '*';
 
-  const patient = new Patient(firstName, lastName, dob, gender, phone);
-
+  const patient = new Patient(pId, firstName, lastName, dob, gender, phone);
 
   // let patientCount = 0;
-  this.dataStorageService.getPatientCount()
+
+  setTimeout(() => {
+    this.dataStorageService.getPatientCount()
     .subscribe(count => {
       this.patientCount = count;
       if (this.patientCount > 0) {
@@ -104,12 +112,20 @@ onSearch() {
         .subscribe(res => {
           this.patients = [];
           res.forEach(result => {
-            this.patients.push(result._source);
+            this.patients.push(new Patient(result._id, result._source.firstName,
+              result._source.lastName,
+              result._source.dob,
+              result._source.gender,
+              result._source.phone));
           });
           this.patientService.getPatients();
         });
       }
     });
+    this.searchMode = true;
+    this.spinner.hide();
+  }, 2000);
+
 
 
     // this.dataStorageService.fetchAllPatients()
@@ -126,6 +142,24 @@ onSearch() {
     // // this.paginator.reset();
 }
 
+onRowEditInit(patient: Patient) {
+  console.log('Row edit initialized!');
+
+}
+
+onRowEditSave(patient: Patient) {
+  // console.log('Row edit saved!');
+  this.dataStorageService.updatePatient(patient)
+  .subscribe(() => {
+    console.log('Success!');
+  });
+  }
+
+
+onRowEditCancel(patient: Patient, index: number) {
+  console.log('Row edit cancelled!');
+}
+
 onAdd() {
   let patientCount = 0;
   this.dataStorageService.getPatientCount()
@@ -138,6 +172,7 @@ onAdd() {
 onClear() {
 this.patients = [];
 this.searchMode = false;
+this.patientSearchForm.controls.pId.setValue('');
 this.patientSearchForm.controls.firstName.setValue('');
 this.patientSearchForm.controls.lastName.setValue('');
 this.patientSearchForm.controls.dob.setValue('');

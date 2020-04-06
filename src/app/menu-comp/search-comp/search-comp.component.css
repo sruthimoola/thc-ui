@@ -10,18 +10,19 @@ legend {
     font-size: 17px;
     color: #602352;
     width: auto;
-    padding: 0 1px;
+    padding: 0 1px; 
 }
 
 #searchCriteria {
     height: 140px;
+    width: 99.3%
 }
 
 #searchResults {
     position: absolute;
     margin-top: -40px;
     overflow-y: scroll;
-    width: 99.3%;
+    width: 99%;
 }
 
 .form-row {
@@ -97,10 +98,48 @@ label {
 
 p-table {
     position: relative;
-    bottom: 10px;
+    top: -10px;
 }
 
 .tableStyle {
     color: #602352 !important;
     font-family: 'Libre Baskerville', serif !important;
+}
+
+.btn-secondary { 
+   color:#602352;
+   height: 28px;
+   border-color: #602352;
+   background-color: white;
+}
+
+
+.btn-success {
+    color: green;
+    background-color: white;
+    height: 28px;
+}
+
+
+.btn-danger {
+    color:red;
+    background-color: white;
+    height: 28px;
+}
+
+i.pi.pi-chevron-circle-down {
+    color: #602352;
+    
+}
+i.pi.pi-chevron-circle-right {
+    color: #602352;
+    
+}
+
+.editButtons {
+    width: 105px;
+}
+
+.expandRow {
+    width: 40px;
 }

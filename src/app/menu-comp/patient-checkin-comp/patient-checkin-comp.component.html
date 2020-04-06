@@ -6,7 +6,6 @@
 <form [formGroup] = "patientCheckinForm" id="newPatientCheckin" #pcForm >
     <fieldset>
         <legend>New Patient Check-in</legend>
-        <br>
         <div class = "form-group row">
             <label for="firstName" class="col-sm-3 col-form-label">First Name: </label>
             <div class="col-sm-9">
@@ -80,9 +79,9 @@
         <div class="form-group row" id="patientCheckinButtons">
             <button type="submit" 
             id="searchButton" 
-            class="btn btn-outline-primary btn-sm col-sm-2" (click) = "onAddPatient()" ><i class="fa fa-plus-square"></i> Add Patient</button>
+            class="btn btn-outline-primary btn-sm col-sm-2" (click) = "onAddPatient()" [disabled] = "!patientCheckinForm.valid"><i class="fa fa-plus-square"></i> Add Patient</button>
         
-            <button type="button" 
+            <button type="reset" 
             id="cancelButton" 
             class="btn btn-outline-secondary btn-sm col-sm-2" (click)= "onClear()" ><i class="fa fa-window-close"></i> Cancel</button>
         </div>

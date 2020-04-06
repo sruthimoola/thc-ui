@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { PatientService } from '../patient.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Patient } from '../patients.model';
-import { map } from 'rxjs/operators';
+import { map, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 const headers = new HttpHeaders()
         .append('Content-Type', 'application/json');
@@ -96,6 +97,18 @@ export class DataStorageService {
         .subscribe(res => {
             console.log(res);
         });
+    }
+
+    updatePatient(patient: Patient) {
+        const params = {
+            firstName: patient.firstName,
+            lastName: patient.lastName,
+            dob: patient.dob,
+            gender: patient.gender,
+            phone: patient.phone
+        };
+
+        return this.http.put('http://localhost:9200/patients/patient/' + patient.pId, params, {headers});
     }
 
 }

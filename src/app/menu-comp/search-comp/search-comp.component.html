@@ -92,30 +92,148 @@
     <legend>Search Results</legend>
     <p-table #dt [columns]="cols" 
                 [value] = "patients" 
+                editMode = "row"
+                dataKey = "pId"
                 [rows]="10" 
                 [paginator]="patients.length > 0"
-                [scrollable]="true" scrollHeight="auto" [virtualRowHeight]="30"
-                styleClass = "border-rounded"
+                [scrollable]="true" 
+                scrollHeight="384px" 
+                [virtualRowHeight]="25"
                 >
         <!-- <ng-template pTemplate="caption">
             List of Patients
         </ng-template> -->
         <ng-template pTemplate = "header" let-columns>
             <tr>
+                <th class="expandRow"></th>
                 <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>
+                <th class="editButtons">Action</th>
                </tr> 
         </ng-template>
-        <ng-template pTemplate = "body" let-rowData>
-            <tr [ngClass]="'tableStyle'">
-                <td>{{ rowData.firstName }}</td>
-                <td>{{ rowData.lastName }}</td>
-                <td>{{ rowData.dob }}</td>
-                <td>{{ rowData.gender }}</td>
-                <td>{{ rowData.phone }}</td>
-                <!-- <td>{{ patient.address }}</td> -->
-                
-              </tr>
+        <ng-template pTemplate = "body"
+                     let-rowData
+                     let-expanded="expanded"
+                     let-editing="editing" 
+                     let-ri="rowIndex"
+                     >      
+            <tr [ngClass]="'tableStyle'" 
+                [pEditableRow]="rowData"
+                >
+                <td [pRowToggler]="rowData" class="expandRow">
+                    <a  href="#detailedView">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'"></i>
+                    </a>
+                 </td>
+                <td [pRowToggler]="rowData"> 
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.firstName">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{rowData.firstName}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td [pRowToggler]="rowData">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input"> 
+                            <input pInputText type="text" [(ngModel)]="rowData.lastName">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ rowData.lastName }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td [pRowToggler]="rowData">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.dob">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                        {{ rowData.dob }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td [pRowToggler]="rowData">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.gender">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ rowData.gender }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td [pRowToggler]="rowData">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.phone">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ rowData.phone }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td style="text-align:center" class="editButtons">
+                    
+                    <button *ngIf="!editing" 
+                            pButton 
+                            type="button" 
+                            pInitEditableRow
+                            class="btn btn-secondary btn-sm"
+                            (click)="onRowEditInit(rowData)"
+                            >
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                    <button *ngIf="editing"
+                            pButton
+                            type="button"
+                            pSaveEditableRow
+                            class="btn btn-success btn-sm"
+                            style="margin-right: .5em"
+                            (click)="onRowEditSave(rowData)">
+                        <i class="pi pi-check"></i>
+                    </button>
+                    <button *ngIf="editing"
+                            pButton
+                            type="button"
+                            pCancelEditableRow
+                            class="btn btn-danger btn-sm"
+                            (click)="onRowEditCancel(rowData, ri)">
+                        <i class="pi pi-times"></i>
+                    </button>
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    <div>
+                        <h5>Patient Details: </h5>
+                        <ul>
+                            <li>First Name: {{rowData.firstName}}</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr> -->
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns" id="detailedView">
+            <tr>
+                <td [attr.colspan]="columns.length + 2">
+                    <fieldset class="form-group">
+                        <legend>Patient Details</legend>
+                            <div class="form-row">
+                                <div class="col">
+                                    <h6>First Name: {{rowData.firstName}}</h6>
+                                    <h6>Last Name: {{rowData.lastName}}</h6>
+                                    <h6>Date of Birth: {{rowData.dob}}</h6>
+                                    <h6>Gender: {{rowData.gender}}</h6>
+                                    <h6>Phone No.: {{rowData.phone}}</h6>
+                                </div>
+                            </div>
+                    </fieldset>
+                </td>
+            </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage" let-columns>
             
@@ -130,3 +248,8 @@
     </p-table>
          
 </fieldset>
+
+
+
+
+

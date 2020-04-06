@@ -6,7 +6,8 @@ import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {FieldsetModule} from 'primeng/fieldset';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -40,7 +41,9 @@ import { DataStorageService } from './shared/data-storage.service';
     ReactiveFormsModule,
     TableModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule,
+    FieldsetModule
 
   ],
   providers: [PatientService, DataStorageService],
