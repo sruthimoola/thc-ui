@@ -48,12 +48,13 @@ label {
 #dob {
     font-size: 14px;
     color: #6C757D;
-    
+    cursor: text;
 }
 
 #gender {
     font-size: 14px;
     color: #6C757D;
+    cursor: pointer;
 }
 
 #location {
@@ -107,7 +108,7 @@ p-table {
 }
 
 .tableStyle:hover {
-    /* cursor:pointer !important; */
+    cursor:pointer;
     background: #F1ECF0 !important;
   }
 
