@@ -105,10 +105,10 @@
         </ng-template> -->
         <ng-template pTemplate = "header" let-columns>
             <tr>
-                <th class="expandRow"></th>
+                <th class="expandRow"><i class="pi pi-sort-down"></i></th>
                 <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>
-                <th class="editButtons">Action</th>
+                <th class="editButtons && tableStyle">Action</th>
                </tr> 
         </ng-template>
         <ng-template pTemplate = "body"
@@ -119,9 +119,10 @@
                      >      
             <tr [ngClass]="'tableStyle'" 
                 [pEditableRow]="rowData"
+                class="cursor-pointer"
                 >
                 <td [pRowToggler]="rowData" class="expandRow">
-                    <a  href="#detailedView">
+                    <a href="#">
                         <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'"></i>
                     </a>
                  </td>
@@ -177,7 +178,7 @@
                 </td>
                 <td style="text-align:center" class="editButtons">
                     
-                    <button *ngIf="!editing" 
+                    <button href="#" *ngIf="!editing" 
                             pButton 
                             type="button" 
                             pInitEditableRow

@@ -9,8 +9,6 @@ import { Table } from 'primeng/table/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 
-
-
 @Component({
   selector: 'app-search-comp',
   templateUrl: './search-comp.component.html',
