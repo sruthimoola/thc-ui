@@ -8,9 +8,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {FieldsetModule} from 'primeng/fieldset';
+import {AccordionModule} from 'primeng/accordion';
+
+// tslint:disable-next-line:max-line-length
+
+
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { MenuCompComponent } from './menu-comp/menu-comp.component';
 import { HomeCompComponent } from './menu-comp/home-comp/home-comp.component';
 import { SearchCompComponent } from './menu-comp/search-comp/search-comp.component';
@@ -25,7 +29,6 @@ import { DataStorageService } from './shared/data-storage.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     MenuCompComponent,
     HomeCompComponent,
     SearchCompComponent,
@@ -43,7 +46,8 @@ import { DataStorageService } from './shared/data-storage.service';
     FontAwesomeModule,
     HttpClientModule,
     NgxSpinnerModule,
-    FieldsetModule
+    FieldsetModule,
+    AccordionModule
 
   ],
   providers: [PatientService, DataStorageService],

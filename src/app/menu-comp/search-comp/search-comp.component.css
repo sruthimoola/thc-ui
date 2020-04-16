@@ -1,3 +1,6 @@
+* {
+    outline: none;
+}
 fieldset {
     padding: 5px;  
     border: 1px solid lightgray;
@@ -11,18 +14,20 @@ legend {
     color: #602352;
     width: auto;
     padding: 0 1px; 
+    font-weight: bold;
 }
 
 #searchCriteria {
+    position: relative;
     height: 140px;
-    width: 99.3%
+    width: 105%; 
 }
 
 #searchResults {
-    position: absolute;
+    position: relative;
     margin-top: -40px;
     overflow-y: scroll;
-    width: 99%;
+    width: 105%; 
 }
 
 .form-row {
@@ -68,6 +73,7 @@ label {
     background-color: white;
     border-color: #602352;
 }
+
 
 #clearButton {
     position: relative;

@@ -2,6 +2,10 @@
     font-family: 'Libre Baskerville', serif;
 }
 
+input:active, textarea:active, select:active, a:active, li:active{
+    outline: none;
+}
+
 #sticky-header {
     position: sticky;
 }

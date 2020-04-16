@@ -76,11 +76,11 @@
     <div id="formButtons">
             <button type="submit" 
             id="searchButton" 
-            class="btn btn-outline-primary btn-sm" (click) = "onSearch()">Search <i class="fa fa-fw fa-search"></i></button>
+            class="btn btn-outline-primary btn-sm shadow-none" (click) = "onSearch()">Search <i class="fa fa-fw fa-search"></i></button>
         
             <button type="button" 
             id="clearButton" 
-            class="btn btn-outline-secondary btn-sm" (click) = "onClear()">Clear</button>
+            class="btn btn-outline-secondary btn-sm shadow-none" (click) = "onClear()">Clear</button>
               
     </div>
     
@@ -149,7 +149,7 @@
                 <td [pRowToggler]="rowData">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="rowData.dob">
+                            <input pInputText type="date" [(ngModel)]="rowData.dob">
                         </ng-template>
                         <ng-template pTemplate="output">
                         {{ rowData.dob }}
@@ -169,7 +169,7 @@
                 <td [pRowToggler]="rowData">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="rowData.phone">
+                            <input pInputText type="number" [(ngModel)]="rowData.phone">
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ rowData.phone }}

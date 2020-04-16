@@ -1,44 +1,76 @@
+* {
+    font-family: 'Libre Baskerville', serif;
+    outline: none;
+}
 
 fieldset {
     padding: 5px;
     border: 1px solid lightgray;
     border-radius: 5px;
-    height: 330px;
-    width: 99%;
-    margin: auto;
+    margin-left: 3px;
+    margin-right: 3px;
+     
 }
-
 legend {
     font-size: 17px;
     color: #602352;
     width: auto;
-    padding: 0 1px;
+    font-weight: bold;
+    padding: 0 1px;   
+}
+#pcForm {
+    position: relative;
+    height: 645px;
+    width: 105%;
+    overflow-x: hidden; 
+}
+/* background: #F1ECF0; */
+
+p-accordionTab {
+    color: #602352;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-accordion {
+    margin-top: -10px;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header a{
+    background-image: linear-gradient(to right,#602352 , white) !important;
+    color: white;
+    border-color: lightgray !important;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header .ui-accordion-toggle-icon{
+    color: white;  
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header:hover a span{
+    
+    border-color: white !important;
+    color: #D4C4D0 !important;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content {
+    border-radius: 5px;
 }
 
 .form-control {
-    max-width: 350px;
-    position: fixed;
-    left: 525px;
+    max-width: 300px;
     margin-top: 2px;
-    margin-left: -220px;
     font-size: 14px;
     height: 30px;
 }
 
-.form-group {
+/* .form-group {
     margin-top: -12px;
+    
+} */
+
+#gender {
+    cursor: pointer;
 }
 
-
-#gen {
-    position: absolute;
-    left: 95px;
-    margin-top: -3px;
-}
-
-#phone-div {
-    margin-top: 55px;
-}
 
 :placeholder-shown {
     font-size: 14px;  
@@ -47,10 +79,12 @@ legend {
 #dob {
     font-size: 14px;
     color: #6C757D;
-    width: 180px;
+    /* width: 180px; */
+    cursor: pointer;
 }
 
 label {
+   
     font-size: 14px;
     color: #602352;
 }
@@ -121,12 +155,20 @@ label {
     background-color: #602352;
 }
 
+#searchButton:disabled:hover {
+    color: #602352;
+    background-color: white;
+    border-color: #602352;
+    cursor: default;
+}
+
 #patientCheckinButtons {
     font-size: 14px;
-    width: 800px;
+    width: 80%;
     position: absolute;
-    left: 124px;
-    margin-top: 0px;
+    bottom: -10px;
+    left: 450px;
+    /* margin-top: 0px; */
     margin-left: auto;
     margin-right: auto;
     text-align: center; 

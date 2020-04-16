@@ -29,12 +29,12 @@ export class DataStorageService {
                     must: [{
                         query_string: {
                             default_field: 'firstName',
-                            query: patient.firstName
+                            query: patient.firstName + '*'
                         }
                     }, {
                         query_string: {
                             default_field: 'lastName',
-                            query: patient.lastName
+                            query: patient.lastName + '*'
                         }
                     }, {
                         query_string: {
@@ -49,7 +49,7 @@ export class DataStorageService {
                     }, {
                         query_string: {
                             default_field: 'phone',
-                            query: patient.phone
+                            query: patient.phone + '*'
                         }
                     }]
                 }

@@ -3,79 +3,81 @@
 <link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/primeng.min.css" />
 
 
-<form [formGroup] = "patientCheckinForm" id="newPatientCheckin" #pcForm >
-    <fieldset>
-        <legend>New Patient Check-in</legend>
-        <div class = "form-group row">
-            <label for="firstName" class="col-sm-3 col-form-label">First Name: </label>
-            <div class="col-sm-9">
-                <input type="text" 
-                id="firstName"
-                class="form-control" 
-                placeholder="First Name"
-                name = "firstName"
-                formControlName = "firstName">
-            </div>
-        </div>
-        <div class = "form-group row">
-                <label for="lastName" class="col-sm-3 col-form-label">Last Name: </label>
-                <div class="col-sm-9">
-                <input type="text" 
-                id="lastName"
-                class="form-control" 
-                placeholder="Last Name"
-                name = "lastName"
-                formControlName = "lastName">
-            </div>
-        </div>
-        <!-- <div class = "form-group row">
-                <label for="patientId" class="col-sm-3 col-form-label">Patient Id: </label>
-                <div class="col-sm-9">
-                <input type="text" 
-                id="patientId"
-                class="form-control" 
-                placeholder="Patient #"
-                name = "patientId"
-                formControlName = "patientId">
-                </div>
-        </div> -->
-        <div class = "form-group row">
-                <label for="dob" class="col-sm-3 col-form-label">Date of Birth: </label>
-                <div class="col-sm-9">
-                <input type="date" 
-                id="dob"
-                class="form-control"
-                name = "dob"
-                formControlName = "dob">
-            </div>
-        </div>
+<form [formGroup] = "patientCheckinForm" #pcForm >
+   <fieldset id="pcForm">
+       <legend >New Patient Check-in Form</legend>
 
-        <div class="form-group row">
-            <label for="gen" class= "col-sm-3 col-form-label">Gender: </label>
-                <div class="col-sm-9" id="gen" name = "gender">
-                <div class="col-sm-3">
-                    <label for="male"><input type="radio" id="male" value = "Male" name= "gender" formControlName = "gender"> Male</label>
+        <p-accordion>
+            <p-accordionTab header="Personal Details"  [selected]="true">
+                <div class="form-row">
+                    <div class = "form-group col">
+                        <label for="firstName">First Name</label>
+                            <input type="text" 
+                            id="firstName"
+                            class="form-control" 
+                            placeholder="First Name"
+                            name = "firstName"
+                            formControlName = "firstName">
+                    </div>
+                    <div class = "form-group col">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" 
+                            id="lastName"
+                            class="form-control" 
+                            placeholder="Last Name"
+                            name = "lastName"
+                            formControlName = "lastName">
+                    </div>
+                
+                <!-- <div class = "form-group row">
+                        <label for="patientId" class="col-sm-3 col-form-label">Patient Id: </label>
+                        <div class="col-sm-9">
+                        <input type="text" 
+                        id="patientId"
+                        class="form-control" 
+                        placeholder="Patient #"
+                        name = "patientId"
+                        formControlName = "patientId">
+                        </div>
+                </div> -->
+                
+                    <div class = "form-group col">
+                        <label for="dob">Date of Birth: </label>
+                        <input type="date" 
+                        id="dob"
+                        class="form-control"
+                        name = "dob"
+                        formControlName = "dob">
+                    </div> 
+                
+                    <div class="form-group col">
+                        <label for="gender">Gender</label>
+                        <select id="gender" class="form-control" name="gender" formControlName="gender">
+                        <option value=''>Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group col" id="phone-div">
+                        <label for="phone">Phone No#: </label>
+                        <input id="phone" name="phone" type="text" placeholder="##########"
+                        class="form-control"
+                        name = "phone"
+                        formControlName = "phone">
+                    </div>
+                    
                 </div>
-                <div class="col-sm-3">
-                    <label for="female"><input type="radio" id="female" value = "Female" name= "gender" formControlName = "gender"> Female</label>
-                </div>
-                <div class="col-sm-3">
-                    <label for="other"><input type="radio" id="other" value = "Other" name= "gender" formControlName = "gender"> Other</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row" id="phone-div">
-            <label for="phone" class="col-sm-3 col-form-label">Phone No#: </label>
-            <div class="col-sm-9">
-            <input id="phone" name="phone" type="text" placeholder="##########"
-            class="form-control"
-            name = "phone"
-            formControlName = "phone">
-        </div>
-    </div>
+            </p-accordionTab>
+            <p-accordionTab header="Treatment Details">
+                ...        
+            </p-accordionTab>
+            
+        </p-accordion>
     
-
+    
+    
         <div class="form-group row" id="patientCheckinButtons">
             <button type="submit" 
             id="searchButton" 
@@ -85,8 +87,9 @@
             id="cancelButton" 
             class="btn btn-outline-secondary btn-sm col-sm-2" (click)= "onClear()" ><i class="fa fa-window-close"></i> Cancel</button>
         </div>
-        
+
     </fieldset>
+   
 
 </form>
 
