@@ -89,20 +89,6 @@ label {
     color: #602352;
 }
 
-#p-add-line1::after {
-    content: "Street address, P.O. box, company name, c/o";
-    color: grey;
-    font-size: 10px;
-    padding: 5px;
-}
-
-#p-add-line2::after {
-    content: "Apartment, suite , unit, building, floor, etc.";
-    color: grey;
-    font-size: 10px;
-    padding: 5px;
-}
-
 #p-city::after {
     content: "City, Town";
     color: grey;

@@ -1,6 +1,4 @@
 import { Patient } from './patients.model';
-// import { Addresses } from './shared/address.model';
-
 
 export class PatientService {
 

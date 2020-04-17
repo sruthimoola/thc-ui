@@ -152,7 +152,7 @@
                             <input pInputText type="date" [(ngModel)]="rowData.dob">
                         </ng-template>
                         <ng-template pTemplate="output">
-                        {{ rowData.dob }}
+                        {{ rowData.dob | date: "M/d/yyyy"}}
                         </ng-template>
                     </p-cellEditor>
                 </td>
@@ -227,7 +227,7 @@
                                 <div class="col">
                                     <h6>First Name: {{rowData.firstName}}</h6>
                                     <h6>Last Name: {{rowData.lastName}}</h6>
-                                    <h6>Date of Birth: {{rowData.dob}}</h6>
+                                    <h6>Date of Birth: {{rowData.dob | date: "M/d/yyyy"}}</h6>
                                     <h6>Gender: {{rowData.gender}}</h6>
                                     <h6>Phone No.: {{rowData.phone}}</h6>
                                 </div>
