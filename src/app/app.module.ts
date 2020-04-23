@@ -9,9 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {FieldsetModule} from 'primeng/fieldset';
 import {AccordionModule} from 'primeng/accordion';
-
-// tslint:disable-next-line:max-line-length
-
+import {DialogModule} from 'primeng/dialog';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +21,7 @@ import { PatientCheckinCompComponent } from './menu-comp/patient-checkin-comp/pa
 import { ContactCompComponent } from './menu-comp/contact-comp/contact-comp.component';
 import { PatientService } from './patient.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { TreatmentService } from './treatment.service';
 
 
 
@@ -47,10 +47,11 @@ import { DataStorageService } from './shared/data-storage.service';
     HttpClientModule,
     NgxSpinnerModule,
     FieldsetModule,
-    AccordionModule
-
+    AccordionModule,
+    DialogModule,
+    NgSelectModule
   ],
-  providers: [PatientService, DataStorageService],
+  providers: [PatientService, DataStorageService, TreatmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

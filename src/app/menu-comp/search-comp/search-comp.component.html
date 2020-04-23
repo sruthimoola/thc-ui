@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/primeng.min.css" />
 
+
 <form [formGroup] = "patientSearchForm">
 
    <fieldset class="form-group" id="searchCriteria">
@@ -46,7 +47,7 @@
         <div class="col">
             <label for="gender">Gender</label>
             <select class="form-control" id="gender" formControlName = "gender" name = "gender">
-                <option value=''>Gender</option>
+                <option value=''>All</option>
                 <option>Male</option>
                 <option>Female</option>
                 <option>Other</option>
@@ -77,7 +78,6 @@
             <button type="submit" 
             id="searchButton" 
             class="btn btn-outline-primary btn-sm shadow-none" (click) = "onSearch()">Search <i class="fa fa-fw fa-search"></i></button>
-        
             <button type="button" 
             id="clearButton" 
             class="btn btn-outline-secondary btn-sm shadow-none" (click) = "onClear()">Clear</button>
@@ -94,22 +94,19 @@
                 [value] = "patients" 
                 editMode = "row"
                 dataKey = "pId"
-                [rows]="10" 
+                [rows]="18" 
                 [paginator]="patients.length > 0"
                 [scrollable]="true" 
-                scrollHeight="384px" 
-                [virtualRowHeight]="25"
+                scrollHeight="410px" 
                 >
-        <!-- <ng-template pTemplate="caption">
-            List of Patients
-        </ng-template> -->
+       
         <ng-template pTemplate = "header" let-columns>
             <tr>
                 <th class="expandRow"><i class="pi pi-sort-down"></i></th>
                 <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>
                 <th class="editButtons && tableStyle">Action</th>
-               </tr> 
+            </tr> 
         </ng-template>
         <ng-template pTemplate = "body"
                      let-rowData
@@ -120,6 +117,7 @@
             <tr [ngClass]="'tableStyle'" 
                 [pEditableRow]="rowData"
                 class="cursor-pointer"
+                (click)="getAllTreatments()"
                 >
                 <td [pRowToggler]="rowData" class="expandRow">
                     <a href="#">
@@ -206,32 +204,102 @@
                     </button>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>
-                    <div>
-                        <h5>Patient Details: </h5>
-                        <ul>
-                            <li>First Name: {{rowData.firstName}}</li>
-                        </ul>
-                    </div>
-                </td>
-            </tr> -->
         </ng-template>
 
-        <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns" id="detailedView">
+        <ng-template pTemplate="rowexpansion" let-columns="columns" id="detailedView">
             <tr>
                 <td [attr.colspan]="columns.length + 2">
-                    <fieldset class="form-group">
-                        <legend>Patient Details</legend>
-                            <div class="form-row">
-                                <div class="col">
-                                    <h6>First Name: {{rowData.firstName}}</h6>
+                    <fieldset class="form-group col-sm-6" id="treatmentTableFormGroup">
+                        <legend>Treatment History</legend>
+                            <p-table #tt [rows]="3"
+                                        [scrollable]="true" 
+                                        scrollHeight= "120px" 
+                                        [value]="treatments"
+                                        sortField="tDate"
+                                        sortOrder="-1"
+                                        >
+                                <ng-template pTemplate = "header">
+                                    <tr>
+                                        <th style="width: 28%;">Treatment Date</th>
+                                        <th style="width: 42%;">Symptoms</th>
+                                        <th style="width: 30%;">Medication Pres.</th>
+                                    </tr> 
+                                </ng-template>
+                                <ng-template pTemplate = "body" let-rowData>      
+                                    <tr>
+                                        <td style="width: 28%;">{{ rowData.tDate }} </td>
+                                        <td style="width: 42%;">{{ rowData.tSymptoms }}</td>
+                                        <td style="width: 30%;">{{ rowData.tMedPrescription }}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                                    <!-- <h6>First Name: {{rowData.firstName}}</h6>
                                     <h6>Last Name: {{rowData.lastName}}</h6>
                                     <h6>Date of Birth: {{rowData.dob | date: "M/d/yyyy"}}</h6>
                                     <h6>Gender: {{rowData.gender}}</h6>
-                                    <h6>Phone No.: {{rowData.phone}}</h6>
-                                </div>
+                                    <h6>Phone No.: {{rowData.phone}}</h6> -->
+                    </fieldset>
+                    <fieldset class="form-group col-sm-6" id="addTreatmentFormGroup">
+                        <legend>Add Treatment</legend>
+                        <div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label col-form-label-sm" for="currentDate">Treatment Date: </label>
+                                <input type="date" 
+                                class="form-control form-control-sm col-sm-3" 
+                                id="currentDate"
+                                name = "currentDate">
+                                <div class="col-sm-1"></div>
+
+                                <button type="button" class="btn btn-light col-sm-3" (click)="showModalNotes()" pButton id="addNotes">Additional Notes <i class="pi pi-pencil"></i></button>
+                                    <p-dialog header="Additional Notes" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+                                        [draggable]="false" [resizable]="false">
+                                        <textarea>
+
+                                        </textarea>
+                                            <p-footer>
+                                                <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false" label="Save">Save</button>
+                                                <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false" label="Cancel">Cancel</button>
+                                            </p-footer>
+                                    </p-dialog>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label col-form-label-sm" for="addSymptoms">Symptom(s): </label>
+                                    <ng-select class="col-sm-9" [items]="itemsSymptoms"
+                                        bindLabel="name"
+                                        placeholder="Select Symptoms"
+                                        [closeOnSelect]="false"
+                                        appendTo="body"
+                                        [multiple]="true"
+                                        [clearSearchOnAdd]="true"
+                                        [virtualScroll]="true"
+                                        [(ngModel)]="selectedSymptoms">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.name}}
+                                        </ng-template>
+                                </ng-select>
+                              </div>
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label col-form-label-sm" for="addMedication">Medication(s): </label>
+                                <ng-select class="symptomStyle col-sm-9" [items]="itemsMedications"
+                                        bindLabel="name"
+                                        placeholder="Select Medications"
+                                        [closeOnSelect]="false"
+                                        appendTo="body"
+                                        [multiple]="true"
+                                        [clearSearchOnAdd]="true"
+                                        [(ngModel)]="selectedMedications">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.name}}
+                                        </ng-template>
+                                </ng-select>
+                              </div>
+                              
+                              <div class="form-group row">
+                                <div class="col-sm-3"></div>
+                                <button type="button" class="btn btn-outline-primary btn-sm col-sm-4 tButtonAdd"><i class="fa fa-plus-square"></i> Add Treatment</button> 
+                                <button type="reset" class="btn btn-outline-secondary btn-sm col-sm-2 tButtonCancel">Cancel</button>                             
                             </div>
+                        </div>
                     </fieldset>
                 </td>
             </tr>

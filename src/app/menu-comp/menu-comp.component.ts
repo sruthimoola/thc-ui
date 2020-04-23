@@ -18,18 +18,14 @@ import { pulse } from 'ng-animate';
     trigger('toggled', [
       // ...
       state('true', style({
-        position: 'absolute',
+        position: 'fixed',
         top: '45px',
-        left: '-70px',
-        width: '224px',
-        height: '650px'
+        width: '180px'
       })),
       state('false', style({
-        position: 'absolute',
+        position: 'fixed',
         top: '45px',
-        left: '-70px',
-        width: '85px',
-        height: '650px'
+        width: '45px'
       })),
       transition('true => false', [
         animate('0.2s')
@@ -83,26 +79,16 @@ export class MenuCompComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-   // this.toggled = true;
-    // this.toggleMenuIcon.nativeElement.style.display = 'block';
-    // this.closeMenuIcon.nativeElement.style.display = 'none';
-    this.sidebarWrapper.nativeElement.style.width = '85px';
-    this.pageContentWrapper.nativeElement.style.marginLeft = '0';
+    this.pageContentWrapper.nativeElement.style.marginLeft = '85px';
     this.pageContentWrapper.nativeElement.style.width = '108%';
   }
   onToggle() {
     this.toggled = !this.toggled;
     if (this.toggled === true) {
-      // this.toggleMenuIcon.nativeElement.style.display = 'none';
-      // this.closeMenuIcon.nativeElement.style.display = 'block';
-      this.sidebarWrapper.nativeElement.style.width = '224px';
-      this.pageContentWrapper.nativeElement.style.marginLeft = '136px';
-      this.pageContentWrapper.nativeElement.style.width = '96.65%';
+      this.pageContentWrapper.nativeElement.style.marginLeft = '220px';
+      this.pageContentWrapper.nativeElement.style.width = '96.5%';
     } else {
-      // this.toggleMenuIcon.nativeElement.style.display = 'block';
-      // this.closeMenuIcon.nativeElement.style.display = 'none';
-      this.sidebarWrapper.nativeElement.style.width = '85px';
-      this.pageContentWrapper.nativeElement.style.marginLeft = '0';
+      this.pageContentWrapper.nativeElement.style.marginLeft = '85px';
       this.pageContentWrapper.nativeElement.style.width = '108%';
     }
   }
