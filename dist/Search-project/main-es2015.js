@@ -1515,7 +1515,7 @@ class DataStorageService {
             from: 0,
             size: patientCount
         };
-        return this.http.post('http://localhost:9200/patients/patient/_search', params, { headers })
+        return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/_search', params, { headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => {
             // tslint:disable-next-line:no-string-literal
             let x;
@@ -1526,7 +1526,7 @@ class DataStorageService {
         }));
     }
     // fetchAllPatients() {
-    //     return this.http.get('http://localhost:9200/_search?size=50', {headers})
+    //     return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_search?size=50', {headers})
     //     .pipe(map(data => {
     //         // tslint:disable-next-line:no-string-literal
     //         let x: any;
@@ -1537,7 +1537,7 @@ class DataStorageService {
     //     }));
     // }
     getPatientCount() {
-        return this.http.get('http://localhost:9200/_count')
+        return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_count')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(data => {
             let x;
             x = data;
@@ -1546,7 +1546,7 @@ class DataStorageService {
         }));
     }
     addPatient(patient) {
-        return this.http.post('http://localhost:9200/patients/patient/', patient, { headers })
+        return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/', patient, { headers })
             .subscribe(res => {
             console.log(res);
         });
@@ -1559,7 +1559,7 @@ class DataStorageService {
             gender: patient.gender,
             phone: patient.phone
         };
-        return this.http.put('http://localhost:9200/patients/patient/' + patient.pId, params, { headers });
+        return this.http.put('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/' + patient.pId, params, { headers });
     }
 }
 DataStorageService.ɵfac = function DataStorageService_Factory(t) { return new (t || DataStorageService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_patient_service__WEBPACK_IMPORTED_MODULE_3__["PatientService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

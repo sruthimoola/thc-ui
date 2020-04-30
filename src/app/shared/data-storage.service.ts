@@ -57,7 +57,7 @@ export class DataStorageService {
             from: 0,
             size: patientCount
         };
-        return this.http.post('http://localhost:9200/patients/patient/_search', params, {headers})
+        return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/_search', params, {headers})
         .pipe(map(data => {
             // tslint:disable-next-line:no-string-literal
             let x: any;
@@ -69,7 +69,7 @@ export class DataStorageService {
     }
 
     // fetchAllPatients() {
-    //     return this.http.get('http://localhost:9200/_search?size=50', {headers})
+    //     return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_search?size=50', {headers})
     //     .pipe(map(data => {
     //         // tslint:disable-next-line:no-string-literal
     //         let x: any;
@@ -81,7 +81,7 @@ export class DataStorageService {
     // }
 
     getPatientCount() {
-        return this.http.get('http://localhost:9200/_count')
+        return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_count')
         .pipe(map(data => {
             let x: any;
             x = data;
@@ -91,7 +91,7 @@ export class DataStorageService {
     }
 
     addPatient(patient: Patient) {
-        return this.http.post('http://localhost:9200/patients/patient/',
+        return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/',
         patient,
         {headers})
         .subscribe(res => {
@@ -108,7 +108,8 @@ export class DataStorageService {
             phone: patient.phone
         };
 
-        return this.http.put('http://localhost:9200/patients/patient/' + patient.pId, params, {headers});
+        // tslint:disable-next-line:max-line-length
+        return this.http.put('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/' + patient.pId, params, {headers});
     }
 
 }

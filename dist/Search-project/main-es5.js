@@ -2832,7 +2832,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             from: 0,
             size: patientCount
           };
-          return this.http.post('http://localhost:9200/patients/patient/_search', params, {
+          return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/_search', params, {
             headers: headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
             // tslint:disable-next-line:no-string-literal
@@ -2843,7 +2843,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return res;
           }));
         } // fetchAllPatients() {
-        //     return this.http.get('http://localhost:9200/_search?size=50', {headers})
+        //     return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_search?size=50', {headers})
         //     .pipe(map(data => {
         //         // tslint:disable-next-line:no-string-literal
         //         let x: any;
@@ -2857,7 +2857,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getPatientCount",
         value: function getPatientCount() {
-          return this.http.get('http://localhost:9200/_count').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
+          return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_count').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (data) {
             var x;
             x = data;
             var res = x.count;
@@ -2867,7 +2867,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "addPatient",
         value: function addPatient(patient) {
-          return this.http.post('http://localhost:9200/patients/patient/', patient, {
+          return this.http.post('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/', patient, {
             headers: headers
           }).subscribe(function (res) {
             console.log(res);
@@ -2883,7 +2883,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             gender: patient.gender,
             phone: patient.phone
           };
-          return this.http.put('http://localhost:9200/patients/patient/' + patient.pId, params, {
+          return this.http.put('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/patients/patient/' + patient.pId, params, {
             headers: headers
           });
         }
