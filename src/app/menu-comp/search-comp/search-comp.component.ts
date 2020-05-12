@@ -23,6 +23,7 @@ export class SearchCompComponent implements OnInit {
 patients: Patient[] = [];
 cols: any[];
 patientSearchForm: FormGroup;
+addTreatmentForm: FormGroup;
 @ViewChild('dt') table: Table;
 patientCount = 0;
 public searchMode: boolean;
@@ -32,6 +33,12 @@ itemsSymptoms = [];
 selectedSymptoms = [];
 itemsMedications = [];
 selectedMedications = [];
+tempPt: string;
+show: boolean;
+tCols: any;
+public isExpanded = false;
+public expandedRows = {};
+public temDataLength = 0;
 // dropdownSymptomsSettings = {};
 
 constructor(private patientService: PatientService,
@@ -52,8 +59,11 @@ ngOnInit() {
     { field: 'phone', header: 'Phone #', display: 'table-cell' }
   ];
   this.onSearch();
-
+  this.show = false;
+  this.initTreatmentForm();
 }
+
+// Initializing Search-Patient Form
 
 private initForm() {
   const pId = '';
@@ -75,6 +85,9 @@ private initForm() {
   });
 
 }
+
+// Collect form control data from search form
+// and display resulted data in results table
 
 onSearch() {
   this.spinner.show();
@@ -127,6 +140,13 @@ onSearch() {
     this.spinner.hide();
   }, 2000);
 
+  this.tCols = [
+    { field: 'treatmentDate', header: 'Treated Date', display: 'table-cell' },
+    { field: 'symptoms', header: 'Symptoms', display: 'table-cell' },
+    { field: 'medications', header: 'Prescription', display: 'table-cell' },
+    { field: 'addNotes', header: 'Notes', display: 'table-cell'}
+  ];
+
 }
 
 // onSearchAllPatients() {
@@ -155,7 +175,6 @@ onSearch() {
     console.log('Success!');
   });
   }
-
 
   onRowEditCancel(patient: Patient, index: number) {
   console.log('Row edit cancelled!');
@@ -188,24 +207,101 @@ onSearch() {
   this.table.reset();
 }
 
-  getAllTreatments() {
-  this.treatments = this.treatmentService.getTreatments();
-  this.itemsSymptoms = this.treatmentService.dropdownSymptoms;
-  this.selectedSymptoms = this.treatmentService.selectedSymptoms;
-  this.itemsMedications = this.treatmentService.dropdownMedications;
-  this.selectedMedications = this.treatmentService.selectedMedications;
-  // this.dropdownSymptomsSettings = this.treatmentService.dropdownSettings;
+
+public initTreatmentForm() {
+  const pId = '';
+  const treatmentDate = '';
+  const addSymptoms = '';
+  const addMedications = '';
+  const addNotes = '';
+
+  this.addTreatmentForm = new FormGroup({
+    pId: new FormControl(pId),
+    treatmentDate: new FormControl(treatmentDate),
+    addSymptoms: new FormControl(addSymptoms),
+    addMedications: new FormControl(addMedications),
+    addNotes: new FormControl(addNotes)
+  });
+
 }
 
-// onSymptomItemSelect(item: any) {
-//   return this.treatmentService.onItemSelect(item);
-// }
-// onSelectAllSymptoms(items: any) {
-//   return this.treatmentService.onSelectAll(items);
-// }
+getAllTreatments(rowData: Patient) {
+
+    for (const obj in this.expandedRows) {
+      if (obj !== rowData.pId) {
+      delete this.expandedRows[obj];
+      }
+  }
+    this.getTreatmentsOfPatient(rowData.pId);
+    this.tempPt = rowData.pId;
+}
+
+getTreatmentsOfPatient(pId: string) {
+      this.dataStorageService.fetchTreatmentsOfPatient(pId)
+      .subscribe(res => {
+        this.treatments = [];
+        res.forEach(result => {
+          this.treatments.push(new Treatment(result._id,
+            result._source.tDate,
+            result._source.tSymptoms,
+            result._source.tMedPrescription,
+            result._source.tNotes));
+        });
+        this.treatmentService.getTreatments();
+      });
+      this.itemsSymptoms = this.treatmentService.dropdownSymptoms;
+      this.itemsMedications = this.treatmentService.dropdownMedications;
+}
+
+addTreatmentToPatient() {
+  console.log(this.tempPt);
+  const pid = this.tempPt;
+  const treatmentDate = this.addTreatmentForm.controls.treatmentDate.value ? this.addTreatmentForm.controls.treatmentDate.value : '*';
+  const addSymptoms = this.addTreatmentForm.controls.addSymptoms.value ? this.addTreatmentForm.controls.addSymptoms.value : '*';
+  const addMedications = this.addTreatmentForm.controls.addMedications.value ? this.addTreatmentForm.controls.addMedications.value : '*';
+  const addNotes = this.addTreatmentForm.controls.addNotes.value ? this.addTreatmentForm.controls.addNotes.value : '*';
+  let symptoms = '';
+  let medications = '';
+  if (addSymptoms !== '*') {
+    let tempSym = '';
+    addSymptoms.forEach(s => {
+      tempSym = tempSym + s.name + ' ';
+    });
+    const tempSymptomsList = tempSym.trim();
+    symptoms = tempSymptomsList.split(' ').join(', ');
+}
+  if (addMedications !== '*') {
+    let tempMed = '';
+    addMedications.forEach(m => {
+      tempMed = tempMed + m.name + ' ';
+    });
+    const tempMedicationsList = tempMed.trim();
+    medications = tempMedicationsList.split(' ').join(', ');
+  }
+
+  this.dataStorageService.addTreatmentToPatient(new Treatment(pid, treatmentDate, symptoms, medications, addNotes))
+  .subscribe(res => {
+    console.log(res);
+    this.spinner.show();
+    setTimeout(() => {
+      this.getTreatmentsOfPatient(pid);
+      this.spinner.hide();
+    }, 1000);
+});
+
+  this.onClearTreatmentForm();
+}
+
+onClearTreatmentForm() {
+  this.addTreatmentForm.reset();
+}
 
 showModalNotes() {
   this.displayModal = true;
+}
+
+onClearNotes() {
+  this.addTreatmentForm.controls.addNotes.reset();
 }
 
 }

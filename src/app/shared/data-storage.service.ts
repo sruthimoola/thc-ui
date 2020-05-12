@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { PatientService } from '../patient.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Patient } from '../patients.model';
+import { Treatment } from '../treatment.model';
 import { map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -13,8 +14,8 @@ const headers = new HttpHeaders()
 })
 export class DataStorageService {
 
-    hostname  = 'ec2-18-218-1-248.us-east-2.compute.amazonaws.com';
-    // hostname = 'localhost';
+    // hostname  = 'ec2-18-218-1-248.us-east-2.compute.amazonaws.com';
+    hostname = 'localhost';
     constructor(private patientService: PatientService,
                 private http: HttpClient) {}
 
@@ -113,4 +114,40 @@ export class DataStorageService {
         return this.http.put('http://' + this.hostname + ':9200/patients/patient/' + patient.pId, params, {headers});
     }
 
+    addTreatmentToPatient(treatment: Treatment) {
+        return this.http.post('http://' + this.hostname + ':9200/treatments/treatment/',
+        treatment,
+        {headers});
+    }
+
+    fetchTreatmentsOfPatient(pId: string) {
+        const params = {
+                query: {
+                bool: {
+                must: [
+                {
+                match: {
+                pid: pId
+                }
+                }
+                ],
+                must_not: [ ],
+                should: [ ]
+                }
+                },
+                from: 0,
+                size: 10,
+                sort: [ ],
+                aggs: { }
+                };
+        return this.http.post('http://' + this.hostname + ':9200/treatments/_search', params, {headers})
+        .pipe(map(data => {
+            // tslint:disable-next-line:no-string-literal
+            let x: any;
+            x = data;
+            const res = x.hits.hits;
+            // console.log(res);
+            return res;
+        }));
+    }
 }
