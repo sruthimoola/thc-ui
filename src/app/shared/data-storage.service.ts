@@ -114,6 +114,7 @@ export class DataStorageService {
         return this.http.put('http://' + this.hostname + ':9200/patients/patient/' + patient.pId, params, {headers});
     }
 
+
     addTreatmentToPatient(treatment: Treatment) {
         return this.http.post('http://' + this.hostname + ':9200/treatments/treatment/',
         treatment,

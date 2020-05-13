@@ -151,7 +151,7 @@ p-table {
 :host /deep/ tr.ng-star-inserted fieldset 
 > p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
 .ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header {
-    height: 32px;
+    height: 38px;
 }
 :host /deep/ tr.ng-star-inserted fieldset 
 > p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
@@ -160,7 +160,19 @@ p-table {
     color: #602352 !important;
     font-size: 12px;
     font-weight: lighter;
+    padding-top: 2px;
 }
+:host /deep/ tr.ng-star-inserted fieldset 
+> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
+.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header .ui-table-thead .ng-star-inserted > 
+.ui-sortable-column.ui-state-highlight > p-sorticon > i.ui-sortable-column-icon.pi.pi-fw.pi-sort-down::before,
+:host /deep/ tr.ng-star-inserted fieldset 
+> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
+.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header .ui-table-thead .ng-star-inserted > 
+.ui-sortable-column.ui-state-highlight > p-sorticon > i.ui-sortable-column-icon.pi.pi-fw.pi-sort-up::before{
+color: grey;
+}
+
 :host /deep/ tr.ng-star-inserted fieldset 
 > p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
 .ui-table-scrollable-view .ui-table-scrollable-body .ui-table-scrollable-body-table .ui-table-tbody .ng-star-inserted > td
@@ -233,6 +245,18 @@ p-table {
     color: #602352;
     max-width: 140px;
 }
+:host /deep/ #showNotes {
+    height: 17px;
+    margin-left: 11px;
+    margin-top: 0px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    font-family: 'Libre Baskerville', serif !important;
+    color: #602352;
+    max-width: 140px;
+}
+
 
 :host /deep/ p-dialog > div.ui-dialog-wrapper.ng-star-inserted.ui-widget-overlay.ui-dialog-mask.ui-dialog-mask-scrollblocker {
     opacity: 1;
@@ -338,7 +362,7 @@ i.pi.pi-sort-down {
 }
 
 .editButtons {
-    width: 80px;
+    width: 85px;
 }
 
 .expandRow {

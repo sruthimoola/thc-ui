@@ -29,13 +29,15 @@ patientCount = 0;
 public searchMode: boolean;
 treatments: Treatment[] = [];
 displayModal: boolean;
+displayModalNotes: boolean;
 itemsSymptoms = [];
 selectedSymptoms = [];
 itemsMedications = [];
 selectedMedications = [];
 tempPt: string;
 show: boolean;
-tCols: any;
+treatmentNotes: string;
+// tCols: any;
 public isExpanded = false;
 public expandedRows = {};
 public temDataLength = 0;
@@ -140,12 +142,12 @@ onSearch() {
     this.spinner.hide();
   }, 2000);
 
-  this.tCols = [
-    { field: 'treatmentDate', header: 'Treated Date', display: 'table-cell' },
-    { field: 'symptoms', header: 'Symptoms', display: 'table-cell' },
-    { field: 'medications', header: 'Prescription', display: 'table-cell' },
-    { field: 'addNotes', header: 'Notes', display: 'table-cell'}
-  ];
+  // this.tCols = [
+  //   { field: 'treatmentDate', header: 'Treated Date', display: 'table-cell' },
+  //   { field: 'symptoms', header: 'Symptoms', display: 'table-cell' },
+  //   { field: 'medications', header: 'Prescription', display: 'table-cell' },
+  //   { field: 'addNotes', header: 'Notes', display: 'table-cell'}
+  // ];
 
 }
 
@@ -176,7 +178,7 @@ onSearch() {
   });
   }
 
-  onRowEditCancel(patient: Patient, index: number) {
+  onRowEditCancel(patient: Patient) {
   console.log('Row edit cancelled!');
 }
 
@@ -279,6 +281,13 @@ addTreatmentToPatient() {
     medications = tempMedicationsList.split(' ').join(', ');
   }
 
+  if (addNotes !== '*') {
+    let tempNotes = '';
+    tempNotes = addNotes.split();
+
+
+  }
+
   this.dataStorageService.addTreatmentToPatient(new Treatment(pid, treatmentDate, symptoms, medications, addNotes))
   .subscribe(res => {
     console.log(res);
@@ -298,6 +307,12 @@ onClearTreatmentForm() {
 
 showModalNotes() {
   this.displayModal = true;
+}
+
+showModalNotesDialog(rowData) {
+  this.displayModalNotes = true;
+  this.treatmentNotes = rowData.tNotes;
+  console.log(rowData);
 }
 
 onClearNotes() {

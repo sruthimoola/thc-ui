@@ -11,6 +11,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {AccordionModule} from 'primeng/accordion';
 import {DialogModule} from 'primeng/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 import { AppComponent } from './app.component';
@@ -49,7 +50,8 @@ import { TreatmentService } from './treatment.service';
     FieldsetModule,
     AccordionModule,
     DialogModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [PatientService, DataStorageService, TreatmentService],
   bootstrap: [AppComponent]
