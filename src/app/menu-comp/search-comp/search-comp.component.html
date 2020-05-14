@@ -86,15 +86,15 @@
                 [rows]="18" 
                 [paginator]="patients.length > 0"
                 [scrollable]="true" 
-                scrollHeight="410px"
+                scrollHeight="418px"
                 [expandedRowKeys]="expandedRows"
                 >
         <ng-template pTemplate = "header" let-columns>
-            <tr>
+            <tr id="searchTableHeader">
                 <th class="expandRow"><i class="pi pi-sort-down"></i></th>
-                <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+                <th *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
                 </th>
-                <th class="editButtons && tableStyle">Action</th>
+                <th class="editButtons">Action</th>
             </tr> 
         </ng-template>
         <ng-template pTemplate = "body"
@@ -103,8 +103,7 @@
                      let-editing="editing" 
                      let-ri="rowIndex"
                      >      
-            <tr [ngClass]="'tableStyle'" 
-                [pEditableRow]="rowData"
+            <tr [pEditableRow]="rowData"
                 class="cursor-pointer"
                 (click) = "getAllTreatments(rowData)"
                 >
@@ -114,53 +113,58 @@
                         <i [ngClass]="expanded ? 'pi pi-chevron-circle-down' : 'pi pi-chevron-circle-right'"></i>
                     </a>
                  </td>
-                <td [pRowToggler]="rowData"> 
+                <td> 
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="rowData.firstName">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{rowData.firstName}}
+                            <span [pRowToggler]="rowData">
+                            {{rowData.firstName}}</span>
                         </ng-template>
                     </p-cellEditor>
                 </td>
-                <td [pRowToggler]="rowData">
+                <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input"> 
                             <input pInputText type="text" [(ngModel)]="rowData.lastName">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{ rowData.lastName }}
+                            <span [pRowToggler]="rowData">
+                            {{ rowData.lastName }}</span>
                         </ng-template>
                     </p-cellEditor>
                 </td>
-                <td [pRowToggler]="rowData">
+                <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="date" [(ngModel)]="rowData.dob">
+                            <input pInputText type="text" [(ngModel)]="rowData.dob">
                         </ng-template>
                         <ng-template pTemplate="output">
-                        {{ rowData.dob | date: "M/d/yyyy"}}
+                        <span [pRowToggler]="rowData">
+                        {{ rowData.dob | date: "M/d/yyyy"}}</span>
                         </ng-template>
                     </p-cellEditor>
                 </td>
-                <td [pRowToggler]="rowData">
+                <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="text" [(ngModel)]="rowData.gender">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{ rowData.gender }}
+                            <span [pRowToggler]="rowData">
+                                {{ rowData.gender }}</span>
                         </ng-template>
                     </p-cellEditor>
                 </td>
-                <td [pRowToggler]="rowData">
+                <td>
                     <p-cellEditor>
                         <ng-template pTemplate="input">
                             <input pInputText type="number" [(ngModel)]="rowData.phone">
                         </ng-template>
                         <ng-template pTemplate="output">
-                            {{ rowData.phone | mask: '(000) 000-0000' }}
+                            <span [pRowToggler]="rowData">
+                                {{ rowData.phone | mask: '(000) 000-0000' }}</span>
                         </ng-template>
                     </p-cellEditor>
                 </td>
@@ -187,7 +191,7 @@
                             type="button"
                             pCancelEditableRow
                             class="btn btn-danger btn-sm"
-                            (click)="onRowEditCancel(rowData)">
+                            (click)="onRowEditCancel(rowData, ri)">
                         <i class="pi pi-times"></i>
                     </button>
                 </td>
@@ -197,6 +201,7 @@
         <ng-template pTemplate="rowexpansion" let-columns="columns" id="detailedView">
             <tr>
                 <td [attr.colspan]="columns.length + 2">
+                    
                     <fieldset class="form-group col-sm-6" id="treatmentTableFormGroup">
                         <legend>Treatment History</legend>
                             <p-table #tt [rows]="3"
@@ -214,16 +219,16 @@
                                         
                                         <th [pSortableColumn]="'tDate'" style="width: 18%; background: #f4f4f4">Treatment Date <p-sortIcon [field]="'tDate'"></p-sortIcon></th>
                                         <th style="width: 35%;">Symptoms</th>
-                                        <th style="width: 35%">Medication Pres.</th>
-                                        <th style="width: 12%">Notes</th>
+                                        <th style="width: 30%">Medication Pres.</th>
+                                        <th style="width: 17%">Notes</th>
                                     </tr> 
                                 </ng-template>
                                 <ng-template pTemplate = "body" let-rowData>      
                                     <tr>
                                         <td style="width: 18%;">{{ rowData.tDate | date: "M/d/yyyy"}} </td>
                                         <td style="width: 35%;">{{ rowData.tSymptoms }}</td>
-                                        <td style="width: 35%;">{{ rowData.tMedPrescription }}</td>
-                                        <td style="width: 12%;">
+                                        <td style="width: 30%;">{{ rowData.tMedPrescription }}</td>
+                                        <td style="width: 17%;">
                                             <button type="button" class="btn btn-light" (click)="showModalNotesDialog(rowData)" label="Show" id="showNotes"><i class="pi pi-list"></i></button>
                                             <p-dialog header="Notes" [(visible)]="displayModalNotes" 
                                                 [modal]="true" [style]="{width: '52vw', height: '200px'}" 

@@ -82,6 +82,16 @@ export class DataStorageService {
     //     }));
     // }
 
+    fetchAPatient(pId: string) {
+        return this.http.get('http://' + this.hostname + ':9200/patients/patient/' + pId, {headers})
+        .pipe(map(data => {
+            let x: any;
+            x = data;
+            const res = x;
+            return res;
+        }));
+    }
+
     getPatientCount() {
         return this.http.get('http://' + this.hostname + ':9200/patients/patient/_count')
         .pipe(map(data => {
