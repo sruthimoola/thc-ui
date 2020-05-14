@@ -25,7 +25,7 @@ legend {
     top: 0px;
     left: 0px;
     width: 90.7%;
-    height: 125px;
+    height: 118px;
 }
 
 #searchResults {
@@ -33,7 +33,7 @@ legend {
     left: 0px;
     margin-top: -40px;
     width: 90.7%;
-    height: 520px; 
+    height: 528px; 
 }
 
 .form-row {
@@ -79,6 +79,8 @@ label {
     color: #602352;
     background-color: white;
     border-color: #602352;
+    height: 22px;
+    padding-top: 0px;
 }
 
 
@@ -87,13 +89,15 @@ label {
     left: 10px;
     color: #602352;
     background-color: white;
-    border-color: #602352;  
+    border-color: #602352; 
+    height: 22px;
+    padding-top: 0px; 
 }
 
 #formButtons {
     font-size: 12px !important;
     position: relative;
-    top: 10px;
+    top: 14px;
     left: -30px;
     margin-left: auto;
     margin-right: auto;
@@ -115,6 +119,11 @@ p-table {
     position: relative;
     top: -10px;
 }
+
+:host /deep/ p-paginator > div > span.ui-paginator-pages > a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active{
+    background-color: #754168;
+}
+
 :host /deep/ div.ui-table-scrollable-header {
     height: 40px;
     text-transform: uppercase;
@@ -154,13 +163,19 @@ p-table {
     height: 38px;
 }
 :host /deep/ tr.ng-star-inserted fieldset 
-> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
-.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header .ui-table-thead .ng-star-inserted > th
+> p-table > .ui-table.ui-widget > .ui-table-scrollable-wrapper.ng-star-inserted >
+.ui-table-scrollable-view > .ui-table-scrollable-header.ui-widget-header > .ui-table-scrollable-header-box > table.ui-table-scrollable-header-table > thead.ui-table-thead > tr.ng-star-inserted > th
 {
     color: #602352 !important;
     font-size: 12px;
     font-weight: lighter;
-    padding-top: 2px;
+}
+::ng-deep body .ui-table .ui-table-thead > tr > th {
+    /* padding: 0.1em 0.857em;  */
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: 40px;
+
 }
 :host /deep/ tr.ng-star-inserted fieldset 
 > p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
@@ -291,7 +306,7 @@ div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-cor
 }
 #treatmentTableFormGroup {
     position: absolute;
-    
+    left: 7px;
 }
 
 #addTreatmentFormGroup {
@@ -300,14 +315,29 @@ div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-cor
     
 }
 
-.tableStyle {
+th {
     color: #602352 !important;
     font-family: 'Libre Baskerville', serif !important;
 }
 
-.tableStyle:hover {
-    cursor:pointer;
+#searchTableHeader {
+    padding-top: 0px !important;
+}
+tr {
+    color: #602352 !important;
+    font-family: 'Libre Baskerville', serif !important;
+}
+
+tr:hover {
     background: #F1ECF0 !important;
+}
+p-cellEditor {
+    font-size: 13px;
+}
+
+p-cellEditor:hover {
+    cursor:pointer;
+    
   }
 
 .btn-secondary { 
@@ -318,7 +348,6 @@ div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-cor
    background-color: white;
    padding-left: 1px;
    padding-top: 0px;
-   
 }
 
 

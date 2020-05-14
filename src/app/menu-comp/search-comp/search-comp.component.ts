@@ -42,6 +42,7 @@ public isExpanded = false;
 public expandedRows = {};
 public temDataLength = 0;
 // dropdownSymptomsSettings = {};
+tempInitPatient: Patient;
 
 constructor(private patientService: PatientService,
             private route: ActivatedRoute,
@@ -166,20 +167,24 @@ onSearch() {
 // }
 
   onRowEditInit(patient: Patient) {
-  console.log('Row edit initialized!');
-
+    // copy patient object to tempInitPatient object to pass on to onRowEditCancel method.
+  this.tempInitPatient = { ...patient};
 }
 
   onRowEditSave(patient: Patient) {
-  // console.log('Row edit saved!');
   this.dataStorageService.updatePatient(patient)
   .subscribe(() => {
     console.log('Success!');
   });
   }
 
-  onRowEditCancel(patient: Patient) {
-  console.log('Row edit cancelled!');
+  onRowEditCancel(patient: Patient, ri: number) {
+  patient.pId = this.tempInitPatient.pId;
+  patient.firstName = this.tempInitPatient.firstName;
+  patient.lastName = this.tempInitPatient.lastName;
+  patient.dob = this.tempInitPatient.dob;
+  patient.gender = this.tempInitPatient.gender;
+  patient.phone =  this.tempInitPatient.phone;
 }
 
   onAdd() {
