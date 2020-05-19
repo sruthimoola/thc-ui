@@ -12,6 +12,8 @@ import {AccordionModule} from 'primeng/accordion';
 import {DialogModule} from 'primeng/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskModule } from 'ngx-mask';
+import {TabViewModule} from 'primeng/tabview';
+
 
 
 import { AppComponent } from './app.component';
@@ -51,7 +53,8 @@ import { TreatmentService } from './treatment.service';
     AccordionModule,
     DialogModule,
     NgSelectModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    TabViewModule
   ],
   providers: [PatientService, DataStorageService, TreatmentService],
   bootstrap: [AppComponent]

@@ -61,7 +61,7 @@ ngOnInit() {
     { field: 'gender', header: 'Gender', display: 'table-cell' },
     { field: 'phone', header: 'Phone #', display: 'table-cell' }
   ];
-  this.onSearch();
+  // this.onSearch();
   this.show = false;
   this.initTreatmentForm();
 }
@@ -110,10 +110,11 @@ onSearch() {
 
   const pId = this.patientSearchForm.controls.pId.value ? this.patientSearchForm.controls.pId.value : '*';
   const firstName = this.patientSearchForm.controls.firstName.value ? this.patientSearchForm.controls.firstName.value : '*';
+  // const firstName = 'Raman';
   const lastName = this.patientSearchForm.controls.lastName.value ? this.patientSearchForm.controls.lastName.value : '*';
   const dob = this.patientSearchForm.controls.dob.value ? this.patientSearchForm.controls.dob.value : '*';
-  // const gender = this.patientSearchForm.controls.gender.value ? this.patientSearchForm.controls.gender.value : '*';
-  const gender = 'Male';
+  const gender = this.patientSearchForm.controls.gender.value ? this.patientSearchForm.controls.gender.value : '*';
+  // const gender = 'Male';
   const phone = this.patientSearchForm.controls.phone.value ? this.patientSearchForm.controls.phone.value : '*';
 
   const patient = new Patient(pId, firstName, lastName, dob, gender, phone);

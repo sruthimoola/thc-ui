@@ -201,12 +201,12 @@
         <ng-template pTemplate="rowexpansion" let-columns="columns" id="detailedView">
             <tr>
                 <td [attr.colspan]="columns.length + 2">
-                    
-                    <fieldset class="form-group col-sm-6" id="treatmentTableFormGroup">
-                        <legend>Treatment History</legend>
+                    <p-tabView>
+                        <p-tabPanel header="Treatment Details" id="treatmentTableFormGroup">
+                            
                             <p-table #tt [rows]="3"
                                         [scrollable]="true" 
-                                        scrollHeight= "130px" 
+                                        scrollHeight= "85px" 
                                         [value]="treatments"
                                         sortField="tDate"
                                         dataKey = "pId"
@@ -217,22 +217,22 @@
                                     <tr>
                                         <!-- <th [ngClass]="'tableStyle'" *ngFor="let col of columns" [pSortableColumn] = "col.field">{{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon></th> -->
                                         
-                                        <th [pSortableColumn]="'tDate'" style="width: 18%; background: #f4f4f4">Treatment Date <p-sortIcon [field]="'tDate'"></p-sortIcon></th>
+                                        <th [pSortableColumn]="'tDate'" style="width: 20%; background: #f4f4f4; padding-top: 0px; padding-bottom: 0px;">Treatment Date <p-sortIcon [field]="'tDate'"></p-sortIcon></th>
                                         <th style="width: 35%;">Symptoms</th>
-                                        <th style="width: 30%">Medication Pres.</th>
-                                        <th style="width: 17%">Notes</th>
+                                        <th style="width: 35%;">Medication Pres.</th>
+                                        <th style="width: 10%;">Notes</th>
                                     </tr> 
                                 </ng-template>
                                 <ng-template pTemplate = "body" let-rowData>      
-                                    <tr>
-                                        <td style="width: 18%;">{{ rowData.tDate | date: "M/d/yyyy"}} </td>
+                                    <tr id="treatmentRows">
+                                        <td style="width: 20%;">{{ rowData.tDate | date: "M/d/yyyy"}} </td>
                                         <td style="width: 35%;">{{ rowData.tSymptoms }}</td>
-                                        <td style="width: 30%;">{{ rowData.tMedPrescription }}</td>
-                                        <td style="width: 17%;">
+                                        <td style="width: 35%;">{{ rowData.tMedPrescription }}</td>
+                                        <td style="width: 10%;">
                                             <button type="button" class="btn btn-light" (click)="showModalNotesDialog(rowData)" label="Show" id="showNotes"><i class="pi pi-list"></i></button>
                                             <p-dialog header="Notes" [(visible)]="displayModalNotes" 
                                                 [modal]="true" [style]="{width: '52vw', height: '200px'}" 
-                                                [baseZIndex]="10000001"
+                                                [baseZIndex]="100001"
                                                     [draggable]="false" [resizable]="false" [closable]="false">
                                                     <p [style]="{width: '48vw', height: '180px'}">{{ treatmentNotes }}</p>
                                                     <p-footer>
@@ -243,78 +243,77 @@
                                         <!--or <td style="width: 12%;">{{ rowData.tNotes }}</td> -->
                                     </tr>
                                 </ng-template>
-                            </p-table>
-                    </fieldset>
-                    <form [formGroup]="addTreatmentForm">
-                    <fieldset class="form-group col-sm-6" id="addTreatmentFormGroup">
-                        <legend>Add Treatment</legend>
-                            <div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label col-form-label-sm" for="treatmentDate">Treatment Date: </label>
-                                    <input type="date" 
-                                    class="form-control form-control-sm col-sm-3" 
-                                    id="treatmentDate"
-                                    name = "treatmentDate"
-                                    formControlName="treatmentDate">
-                                    <div class="col-sm-1"></div>
-
-                                    <button type="button" class="btn btn-light col-sm-3" (click)="showModalNotes()" id="addNotes">Additional Notes <i class="pi pi-pencil"></i></button>
-                                        <p-dialog header="Additional Notes" [(visible)]="displayModal" [modal]="true" [style]="{width: '52vw'}" [baseZIndex]="10000001"
-                                            [draggable]="false" [resizable]="false" [closable]="false">
-                                            <textarea class="form-control" formControlName="addNotes" [style]="{width: '48vw'}">
-                                            </textarea>
-                                            <p-footer>
-                                                <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false">Save</button>
-                                                <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false" (click)="onClearNotes()">Clear</button>
-                                            </p-footer>
-                                        </p-dialog>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label col-form-label-sm" for="addSymptoms">Symptom(s): </label>
-                                        <ng-select class="col-sm-9" [items]="itemsSymptoms"
-                                            bindLabel="name"
-                                            placeholder="Select Symptoms"
-                                            [closeOnSelect]="false"
-                                            appendTo="body"
-                                            [multiple]="true"
-                                            [clearSearchOnAdd]="true"
-                                            [virtualScroll]="true"
-                                            formControlName = "addSymptoms"
-                                            >
-                                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/> {{item.name}}
-                                            </ng-template>
-                                    </ng-select>
-                                    <!-- [(ngModel)]="selectedSymptoms"
-                                    [ngModel]="item$.selected" -->
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label col-form-label-sm" for="addMedications">Medication(s): </label>
-                                    <ng-select class="symptomStyle col-sm-9" [items]="itemsMedications"
-                                            bindLabel="name"
-                                            placeholder="Select Medications"
-                                            [closeOnSelect]="false"
-                                            appendTo="body"
-                                            [multiple]="true"
-                                            [clearSearchOnAdd]="true"
-                                            formControlName = "addMedications"
-                                            >
-                                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/> {{item.name}}
-                                            </ng-template>
-                                            <!-- [(ngModel)]="selectedMedications"
-                                            [ngModel]="item$.selected" -->
-                                    </ng-select>
-                                </div>
-                                
-                                <div class="form-group row">
-                                    <div class="col-sm-3"></div>
-                                    <button type="button" class="btn btn-outline-primary btn-sm col-sm-4 tButtonAdd" (click)="addTreatmentToPatient()"><i class="fa fa-plus-square"></i> Add Treatment</button> 
-                                    <button type="reset" class="btn btn-outline-secondary btn-sm col-sm-2 tButtonCancel" (click)="onClearTreatmentForm()">Cancel</button>                             
-                                </div>
-                            </div>
-                    </fieldset>
-                </form>
+                            </p-table>                       
+                        </p-tabPanel>       
+                        <p-tabPanel header="Add Treatment" id="addTreatmentFormGroup">
+                            <form [formGroup]="addTreatmentForm">
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-1 col-form-label col-form-label-sm" for="treatmentDate">TreatmentDate: </label>
+                                        <input type="date" 
+                                        class="form-control form-control-sm col-sm-2" 
+                                        id="treatmentDate"
+                                        name = "treatmentDate"
+                                        formControlName="treatmentDate">
+                                        <div class="col-sm-1"></div>
+    
+                                        <button type="button" class="btn btn-light col-sm-2" (click)="showModalNotes()" id="addNotes">Additional Notes <i class="pi pi-pencil"></i></button>
+                                            <p-dialog header="Additional Notes" [(visible)]="displayModal" [modal]="true" [style]="{width: '52vw'}" [baseZIndex]="10000001"
+                                                [draggable]="false" [resizable]="false" [closable]="false">
+                                                <textarea class="form-control" formControlName="addNotes" [style]="{width: '48vw'}">
+                                                </textarea>
+                                                <p-footer>
+                                                    <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false">Save</button>
+                                                    <button type="button" class="btn btn-outline-secondary col-sm-4" pButton (click)="displayModal=false" (click)="onClearNotes()">Clear</button>
+                                                </p-footer>
+                                            </p-dialog>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-1 col-form-label col-form-label-sm" for="addSymptoms">Symptom(s): </label>
+                                            <ng-select class="col-sm-5" [items]="itemsSymptoms"
+                                                bindLabel="name"
+                                                placeholder="Select Symptoms"
+                                                [closeOnSelect]="false"
+                                                appendTo="body"
+                                                [multiple]="true"
+                                                [clearSearchOnAdd]="true"
+                                                [virtualScroll]="true"
+                                                formControlName = "addSymptoms"
+                                                >
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/> {{item.name}}
+                                                </ng-template>
+                                        </ng-select>
+                                        <label class="col-sm-1 col-form-label col-form-label-sm" for="addMedications">Medication(s): </label>
+                                        <ng-select class="symptomStyle col-sm-5" [items]="itemsMedications"
+                                                bindLabel="name"
+                                                placeholder="Select Medications"
+                                                [closeOnSelect]="false"
+                                                appendTo="body"
+                                                [multiple]="true"
+                                                [clearSearchOnAdd]="true"
+                                                formControlName = "addMedications"
+                                                >
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" [ngModelOptions]="{standalone: true}"/> {{item.name}}
+                                                </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    
+                                    <div class="form-group row">
+                                        <div class="col-sm-4"></div>
+                                        <button type="button" class="btn btn-outline-primary btn-sm col-sm-2 tButtonAdd" (click)="addTreatmentToPatient()"><i class="fa fa-plus-square"></i> Add Treatment</button> 
+                                        <button type="reset" class="btn btn-outline-secondary btn-sm col-sm-1 tButtonCancel" (click)="onClearTreatmentForm()">Cancel</button>                             
+                                    </div>
+                                </div>      
+                            </form>                        
+                        </p-tabPanel>
+                        <p-tabPanel header="Schedule Appointment">
+                            After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+                        </p-tabPanel>
+                    </p-tabView>
+                    
+                    
                 </td>
             </tr>
         </ng-template>

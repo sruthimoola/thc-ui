@@ -44,6 +44,7 @@ label {
     font-size: 14px;
     color: #602352;
     margin-bottom: -3px;
+    
 }
 
 :placeholder-shown {
@@ -122,10 +123,11 @@ p-table {
 
 :host /deep/ p-paginator > div > span.ui-paginator-pages > a.ui-paginator-page.ui-paginator-element.ui-state-default.ui-corner-all.ui-state-active{
     background-color: #754168;
+    outline: none;
 }
 
 :host /deep/ div.ui-table-scrollable-header {
-    height: 40px;
+    height: 30px;
     text-transform: uppercase;
 }
 
@@ -138,127 +140,19 @@ p-table {
     font-family: 'Libre Baskerville', serif;
     
 }
-:host /deep/ tr.ng-star-inserted fieldset.form-group {
-    width: 49%;
-    height: 190px;
-    font-size: 12px;
-    color: #602352;
-    background: #F9F6F8;
-    margin-top: 5px;
-}
-:host /deep/ tr.ng-star-inserted fieldset > legend {
-    font-weight: bolder;
-    font-size: 12px;
-}
 
-
-:host /deep/ tr.ng-star-inserted fieldset > p-table {
-    position: absolute;
-    margin-top: 26px;
-    width: 98.3%;
-} 
-:host /deep/ tr.ng-star-inserted fieldset 
-> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
-.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header {
-    height: 38px;
+#treatmentTableFormGroup {
+    position: relative;
+    left: 0px;
+    top: 12px;
 }
-:host /deep/ tr.ng-star-inserted fieldset 
-> p-table > .ui-table.ui-widget > .ui-table-scrollable-wrapper.ng-star-inserted >
-.ui-table-scrollable-view > .ui-table-scrollable-header.ui-widget-header > .ui-table-scrollable-header-box > table.ui-table-scrollable-header-table > thead.ui-table-thead > tr.ng-star-inserted > th
-{
-    color: #602352 !important;
-    font-size: 12px;
-    font-weight: lighter;
-}
-::ng-deep body .ui-table .ui-table-thead > tr > th {
-    /* padding: 0.1em 0.857em;  */
-    padding-top: 1px;
-    padding-bottom: 1px;
-    height: 40px;
-
-}
-:host /deep/ tr.ng-star-inserted fieldset 
-> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
-.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header .ui-table-thead .ng-star-inserted > 
-.ui-sortable-column.ui-state-highlight > p-sorticon > i.ui-sortable-column-icon.pi.pi-fw.pi-sort-down::before,
-:host /deep/ tr.ng-star-inserted fieldset 
-> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
-.ui-table-scrollable-view .ui-table-scrollable-header.ui-widget-header .ui-table-thead .ng-star-inserted > 
-.ui-sortable-column.ui-state-highlight > p-sorticon > i.ui-sortable-column-icon.pi.pi-fw.pi-sort-up::before{
-color: grey;
-}
-
-:host /deep/ tr.ng-star-inserted fieldset 
-> p-table .ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted 
-.ui-table-scrollable-view .ui-table-scrollable-body .ui-table-scrollable-body-table .ui-table-tbody .ng-star-inserted > td
-{
-    color: #602352 !important;
-    font-size: 12px;
-    padding-top: 0.8px;
-    padding-bottom: 1px;
-}
-
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div {
-    margin-top: -12px;
-}
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row {
-    margin-bottom: 5px;
-}
-
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row > label {
-    font-size: 12px;
-}
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row > input{
-    height: 25px;
-    font-size: 12px;
-    margin-left: -20px;
-    margin-top: 3px;
-    min-width: 135px;
-    font-family: 'Libre Baskerville', serif !important;
-    color: #602352;
-    
-}
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row > ng-select.col-sm-9.ng-select .ng-select-container{
-    min-height: 25px;
-    max-height: 25px;
-    overflow-y: scroll;
-    margin-left: -35px;
-}
-
-::ng-deep .ng-dropdown-panel {
-    top: 347px !important;
-    bottom: auto;
-    opacity: 0 !important;
-}
-
-::ng-deep div.ng-dropdown-panel-items{
-    width: 420px;
-    margin-left: -20px;
-    margin-top: -20px;
-    font-size: 12px;
-    font-family: 'Libre Baskerville', serif !important;
-    color: #602352 !important;
-}
-
-::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
-::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
-::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover
-{
-    height: 25px;
-    color: #602352;
-    font-size: 12px;
-}
-
-:host /deep/ #addNotes {
-    height: 20px;
-    margin-left: 11px;
-    margin-top: 5px;
-    padding-left: 4px;
-    padding-top: 0px;
-    padding-right: 0px;
-    font-family: 'Libre Baskerville', serif !important;
-    color: #602352;
-    max-width: 140px;
+::ng-deep p-tabview .ui-tabview.ui-widget.ui-widget .ui-tabview-panels .ui-tabview-panel.ui-widget-content.ng-star-inserted p-table 
+.ui-table.ui-widget .ui-table-scrollable-wrapper.ng-star-inserted .ui-table-scrollable-view 
+.ui-table-scrollable-body table.ui-table-scrollable-body-tablet tbody.ui-table-tbody 
+tr.ng-star-inserted td{
+    padding-top: 0.1em !important;
+    padding-bottom: 0.1em !important;
+    min-height: 15px;
 }
 :host /deep/ #showNotes {
     height: 17px;
@@ -272,12 +166,85 @@ color: grey;
     max-width: 140px;
 }
 
-
 :host /deep/ p-dialog > div.ui-dialog-wrapper.ng-star-inserted.ui-widget-overlay.ui-dialog-mask.ui-dialog-mask-scrollblocker {
     opacity: 1;
     width: 100%;
     z-index: 1000 !important;
     
+}
+
+#addTreatmentFormGroup {
+    position: relative;
+    left: 10px;
+    top: 0px;
+}
+
+#addNotes {
+    height: 20px;
+    padding-top: 0px;
+    margin-top: 4px;
+    font-family: 'Libre Baskerville', serif !important;
+    color: #602352;
+    font-size: 12px;
+    min-width: 150px;
+    max-width: 150px;
+}
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group {
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    color: #602352;
+    background: #F9F6F8;
+    margin-bottom: 4px;
+}
+
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row > label {
+    font-size: 12px;
+    font-family: 'Libre Baskerville', serif !important;
+
+}
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row > input{
+    height: 25px;
+    font-size: 12px;
+    margin-top: 3px;
+    min-width: 135px;
+    font-family: 'Libre Baskerville', serif !important;
+    color: #602352;
+    margin-left: 20px;
+    
+}
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div  .form-group.row > ng-select.col-sm-5.ng-select .ng-select-container{
+    min-height: 25px;
+    max-height: 25px;
+    overflow-y: scroll;
+    margin-left: 5px;
+    font-family: 'Libre Baskerville', serif !important;
+    color: #602352;
+    font-size: 12px;
+}
+
+::ng-deep .ng-dropdown-panel {
+    top: 347px !important;
+    bottom: auto;
+    opacity: 0 !important;
+}
+
+::ng-deep div.ng-dropdown-panel-items{
+    width: 453px;
+    margin-left: 20px;
+    margin-top: -29px;
+    font-size: 12px;
+    font-family: 'Libre Baskerville', serif !important;
+    color: #602352 !important;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover
+{
+    height: 25px;
+    color: #602352;
+    font-size: 12px;
 }
 :host /deep/ p-dialog > div.ui-dialog-wrapper.ng-star-inserted.ui-widget-overlay.ui-dialog-mask.ui-dialog-mask-scrollblocker >
 div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-shadow.ng-star-inserted > div.ui-dialog-content.ui-widget-content > textarea {
@@ -287,8 +254,8 @@ div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-cor
    overflow-y: scroll;
 }
 
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row .tButtonAdd,
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row .tButtonCancel {
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row .tButtonAdd,
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row .tButtonCancel {
     margin-right: 10px;
     margin-top: 10px;
     color: #602352;
@@ -299,21 +266,58 @@ div.ng-trigger.ng-trigger-animation.ui-dialog.ui-widget.ui-widget-content.ui-cor
     padding-top: 0px;
     font-size: 12px !important;
 }
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row > .tButtonAdd:hover,
-:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div .form-group.row .tButtonCancel:hover {
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row > .tButtonAdd:hover,
+:host /deep/ tr.ng-star-inserted #addTreatmentFormGroup > div > form > div .form-group.row .tButtonCancel:hover {
     color: white;
     background-color: #602352;
 }
-#treatmentTableFormGroup {
-    position: absolute;
-    left: 7px;
+
+
+/* Tab View for Treatment Details, Add Treatments and Schedule Appointment */
+::ng-deep body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active, 
+::ng-deep body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active, 
+::ng-deep body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active,
+::ng-deep body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active{
+     height: 20px !important;
+     background-color: #602352;
+     border: 1px solid #602352;
+     box-shadow: none;
+ }
+ ::ng-deep body .ui-tabview.ui-tabview-top .ui-tabview-nav li a, 
+ ::ng-deep body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li a, 
+ ::ng-deep body .ui-tabview.ui-tabview-left .ui-tabview-nav li a, 
+ ::ng-deep body .ui-tabview.ui-tabview-right .ui-tabview-nav li a{
+    color: #602352;
+    padding: 0em 0.7em;
+    font-family: 'Libre Baskerville', serif !important;
+    font-weight: lighter;
+    font-size: 12px;
+ }
+ ::ng-deep body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active:hover, 
+ ::ng-deep body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active:hover, 
+ ::ng-deep body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active:hover, 
+ ::ng-deep body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active:hover {
+     background-color: #602352;
+     border: 1px solid #602352;
+ }
+ ::ng-deep body .ui-widget {
+     margin-top: 2px;
+     font-size: 12px !important;
+ }
+ ::ng-deep body .ui-tabview.ui-tabview-top,
+ ::ng-deep body .ui-tabview.ui-tabview-bottom,
+ ::ng-deep body .ui-tabview.ui-tabview-left,
+ ::ng-deep body .ui-tabview.ui-tabview-right
+{
+    background-color: #F9F6F8 !important;
 }
 
-#addTreatmentFormGroup {
-    position: relative;
-    margin-left: 51%;
-    
-}
+ ::ng-deep body .ui-tabview .ui-tabview-panels {
+    background-color: #F9F6F8 !important;
+    height: 140px;
+    margin-bottom: 10px;
+    box-shadow: none;
+ }
 
 th {
     color: #602352 !important;
@@ -329,7 +333,7 @@ tr {
 }
 
 tr:hover {
-    background: #F1ECF0 !important;
+    background: #F9F6F8 !important;
 }
 p-cellEditor {
     font-size: 13px;
@@ -337,8 +341,7 @@ p-cellEditor {
 
 p-cellEditor:hover {
     cursor:pointer;
-    
-  }
+}
 
 .btn-secondary { 
    color:#602352;
@@ -387,7 +390,8 @@ i.pi.pi-chevron-circle-right {
 i.pi.pi-sort-down {
     color: lightgray;
     position: relative;
-    left: -9px;
+    left: -7px;
+    bottom: 2px;
 }
 
 .editButtons {
@@ -395,6 +399,8 @@ i.pi.pi-sort-down {
 }
 
 .expandRow {
-    width: 25px;
+    width: 20px;
 }
+
+
 
