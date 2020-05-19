@@ -3,3 +3,4 @@
 @import '~primeng/resources/primeng.min.css';
 @import '~primeng/resources/themes/nova-light/theme.css';
 @import '~font-awesome/css/font-awesome.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";

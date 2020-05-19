@@ -1,47 +1,77 @@
-#newPatientCheckin {
-    margin: 0 auto;
-   
+* {
+    font-family: 'Libre Baskerville', serif;
+    outline: none;
 }
 
 fieldset {
     padding: 5px;
     border: 1px solid lightgray;
     border-radius: 5px;
-    height: 360px;
-    width: 700px;
+    margin-left: 3px;
+    margin-right: 3px;
+     
 }
-
 legend {
     font-size: 17px;
     color: #602352;
     width: auto;
-    padding: 0 1px;
+    font-weight: bold;
+    padding: 0 1px;   
+}
+#pcForm {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 90.7%;
+    overflow-x: hidden; 
+}
+/* background: #F1ECF0; */
+
+p-accordionTab {
+    color: #602352;
+    font-size: 14px;
+}
+
+:host /deep/ .ui-accordion {
+    margin-top: -10px;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header a{
+    background-image: linear-gradient(to right,#602352 , white) !important;
+    color: white;
+    border-color: lightgray !important;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header .ui-accordion-toggle-icon{
+    color: white;  
+}
+
+:host /deep/ .ui-accordion .ui-accordion-header:hover a span{
+    
+    border-color: white !important;
+    color: #D4C4D0 !important;
+}
+
+:host /deep/ .ui-accordion .ui-accordion-content {
+    border-radius: 5px;
 }
 
 .form-control {
-    max-width: 350px;
-    position: fixed;
-    left: 350px;
+    max-width: 300px;
     margin-top: 2px;
-    margin-left: -220px;
     font-size: 14px;
     height: 30px;
 }
 
-.form-group {
+/* .form-group {
     margin-top: -12px;
+    
+} */
+
+#gender {
+    cursor: pointer;
 }
 
-
-#gen {
-    position: fixed;
-    left: 105px;
-    margin-top: -5px;
-}
-
-#phone-div {
-    margin-top: 55px;
-}
 
 :placeholder-shown {
     font-size: 14px;  
@@ -50,26 +80,14 @@ legend {
 #dob {
     font-size: 14px;
     color: #6C757D;
-    width: 180px;
+    /* width: 180px; */
+    cursor: pointer;
 }
 
 label {
+   
     font-size: 14px;
     color: #602352;
-}
-
-#p-add-line1::after {
-    content: "Street address, P.O. box, company name, c/o";
-    color: grey;
-    font-size: 10px;
-    padding: 5px;
-}
-
-#p-add-line2::after {
-    content: "Apartment, suite , unit, building, floor, etc.";
-    color: grey;
-    font-size: 10px;
-    padding: 5px;
 }
 
 #p-city::after {
@@ -124,13 +142,25 @@ label {
     background-color: #602352;
 }
 
+#searchButton:disabled:hover {
+    color: #602352;
+    background-color: white;
+    border-color: #602352;
+    cursor: default;
+}
+
 #patientCheckinButtons {
     font-size: 14px;
-    width: 60%;
-    position: absolute;
-    left: 124px;
-    margin-top: 0px;
+    width: 80%;
+    position: relative;
+    bottom: -10px;
+    left: 25%;
     margin-left: auto;
     margin-right: auto;
     text-align: center; 
 }
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+

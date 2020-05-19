@@ -1,6 +1,4 @@
 import { Patient } from './patients.model';
-import { Addresses } from './shared/address.model';
-
 
 export class PatientService {
 
@@ -16,8 +14,7 @@ export class PatientService {
         return this.patients.slice();
     }
 
-    getPatient(index: number) {
-        return this.patients[index];
+    getPatient(id: number) {
     }
 
 

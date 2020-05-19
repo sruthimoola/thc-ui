@@ -1,29 +1,59 @@
-<!-- <ul class="list-group list-group-horizontal-sm">
-    <li class="list-group-item"><button type="button" class="btn btn-outline-secondary" id="searchPatient">Search Patient</button></li>
-    <li class="list-group-item"><button type="button" class="btn btn-outline-secondary" id="patientCheckin">Patient Checkin</button></li>
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/primeng@4.0.1/resources/primeng.min.css" />
     
-  </ul> -->
-<div id="mainMenu">
-  <ul class= "nav topnav border rounded fixed-top">
-        <li><a routerLink = "/home" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-home"></i> Home</a></li>
-        <li><a routerLink = "/search-patient" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-search"></i> Search Patient</a></li>
-        <li><a routerLink = "/patient-checkin" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-check-square-o"></i> Patient Check-in</a></li>
-        <li><a routerLink = "/contact" style = "cursor: pointer;" routerLinkActive = "active"><i class="fa fa-fw fa-envelope"></i> Contact Us</a></li>
+<div id="wrapper">
+    <div id="header">
+        
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" routerLink = "/home">Tirumala Homeo Clinic</a>
+            <div class="container-fluid">
+                <button id="login" type="button" class="btn btn-outline-light">
+                    <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+        </nav>
+        <div id="menu-toggle"
+                role="button" 
+                (click)="onToggle()">
+                <div class="toggleIcon">
+                <span class="icon-bar" [@hamburguerX]="toggled ? 'topX' : 'hamburguer'"></span>
+                <span class="icon-bar" [@hamburguerX]="toggled ? 'hide' : 'hamburguer'"></span>
+                <span class="icon-bar" [@hamburguerX]="toggled ? 'bottomX' : 'hamburguer'"></span>
+                </div> 
+        </div>
+    </div>
 
-  </ul>
+
+    
+    <div [@toggled]="toggled ? 'true' : 'false'" id="sidebarWrapper" #sidebarWrapper>
+        <ul class="sidebar-nav">
+            <li routerLink = "/home" 
+                routerLinkActive = "active" >
+                <i style = "cursor: pointer;" class="fa fa-fw fa-home"></i>
+                <a style = "cursor: pointer;">Home</a>
+            </li>
+            <li routerLink = "/search-patient" routerLinkActive = "active">
+                <i style = "cursor: pointer;" class="fa fa-fw fa-search"></i>
+                <a style = "cursor: pointer;">Search Patient</a>
+            </li>
+            <li routerLink = "/patient-checkin" routerLinkActive = "active">
+                <i id="pcIcon" style = "cursor: pointer;" class="fa fa-check-square-o"></i><a style = "cursor: pointer;" >Patient Check-in</a>
+            </li>
+            <li routerLink = "/contact" routerLinkActive = "active">
+                <i style = "cursor: pointer;" class="fa fa-fw fa-envelope"></i><a style = "cursor: pointer;">Contact Us</a>
+            </li>
+        </ul>
+    </div> 
+   
+    <div id="pageContentWrapper" #pageContentWrapper>
+        <div class="container-fluid">
+            <div id="router-outlet">
+                <router-outlet></router-outlet>
+            </div> 
+            </div>
+    </div> 
 </div>
-  <br>
-
-  <div id="router-outlet">
-  
-      <router-outlet></router-outlet>
-
-      <!-- <app-home-comp></app-home-comp>
-  
-      <app-search-comp></app-search-comp>
-
-      <app-patient-checkin-comp></app-patient-checkin-comp>
-
-      <app-contact-comp></app-contact-comp> -->
-  
-  </div>      

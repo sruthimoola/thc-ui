@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { PatientService } from '../patient.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Patient } from '../patients.model';
-import { map } from 'rxjs/operators';
+import { Treatment } from '../treatment.model';
+import { map, tap, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 const headers = new HttpHeaders()
         .append('Content-Type', 'application/json');
@@ -12,7 +14,8 @@ const headers = new HttpHeaders()
 })
 export class DataStorageService {
 
-
+    // hostname  = 'ec2-18-218-1-248.us-east-2.compute.amazonaws.com';
+    hostname = 'localhost';
     constructor(private patientService: PatientService,
                 private http: HttpClient) {}
 
@@ -28,12 +31,12 @@ export class DataStorageService {
                     must: [{
                         query_string: {
                             default_field: 'firstName',
-                            query: patient.firstName
+                            query: patient.firstName + '*'
                         }
                     }, {
                         query_string: {
                             default_field: 'lastName',
-                            query: patient.lastName
+                            query: patient.lastName + '*'
                         }
                     }, {
                         query_string: {
@@ -48,7 +51,7 @@ export class DataStorageService {
                     }, {
                         query_string: {
                             default_field: 'phone',
-                            query: patient.phone
+                            query: patient.phone + '*'
                         }
                     }]
                 }
@@ -56,7 +59,7 @@ export class DataStorageService {
             from: 0,
             size: patientCount
         };
-        return this.http.post('http://localhost:9200/patients/patient/_search', params, {headers})
+        return this.http.post('http://' + this.hostname + ':9200/patients/patient/_search', params, {headers})
         .pipe(map(data => {
             // tslint:disable-next-line:no-string-literal
             let x: any;
@@ -68,7 +71,7 @@ export class DataStorageService {
     }
 
     // fetchAllPatients() {
-    //     return this.http.get('http://localhost:9200/_search?size=50', {headers})
+    //     return this.http.get('http://ec2-18-218-1-248.us-east-2.compute.amazonaws.com:9200/_search?size=50', {headers})
     //     .pipe(map(data => {
     //         // tslint:disable-next-line:no-string-literal
     //         let x: any;
@@ -79,8 +82,18 @@ export class DataStorageService {
     //     }));
     // }
 
+    fetchAPatient(pId: string) {
+        return this.http.get('http://' + this.hostname + ':9200/patients/patient/' + pId, {headers})
+        .pipe(map(data => {
+            let x: any;
+            x = data;
+            const res = x;
+            return res;
+        }));
+    }
+
     getPatientCount() {
-        return this.http.get('http://localhost:9200/_count')
+        return this.http.get('http://' + this.hostname + ':9200/patients/patient/_count')
         .pipe(map(data => {
             let x: any;
             x = data;
@@ -90,7 +103,7 @@ export class DataStorageService {
     }
 
     addPatient(patient: Patient) {
-        return this.http.post('http://localhost:9200/patients/patient/',
+        return this.http.post('http://' + this.hostname + ':9200/patients/patient/',
         patient,
         {headers})
         .subscribe(res => {
@@ -98,4 +111,54 @@ export class DataStorageService {
         });
     }
 
+    updatePatient(patient: Patient) {
+        const params = {
+            firstName: patient.firstName,
+            lastName: patient.lastName,
+            dob: patient.dob,
+            gender: patient.gender,
+            phone: patient.phone
+        };
+
+        // tslint:disable-next-line:max-line-length
+        return this.http.put('http://' + this.hostname + ':9200/patients/patient/' + patient.pId, params, {headers});
+    }
+
+
+    addTreatmentToPatient(treatment: Treatment) {
+        return this.http.post('http://' + this.hostname + ':9200/treatments/treatment/',
+        treatment,
+        {headers});
+    }
+
+    fetchTreatmentsOfPatient(pId: string) {
+        const params = {
+                query: {
+                bool: {
+                must: [
+                {
+                match: {
+                pid: pId
+                }
+                }
+                ],
+                must_not: [ ],
+                should: [ ]
+                }
+                },
+                from: 0,
+                size: 10,
+                sort: [ ],
+                aggs: { }
+                };
+        return this.http.post('http://' + this.hostname + ':9200/treatments/_search', params, {headers})
+        .pipe(map(data => {
+            // tslint:disable-next-line:no-string-literal
+            let x: any;
+            x = data;
+            const res = x.hits.hits;
+            // console.log(res);
+            return res;
+        }));
+    }
 }
